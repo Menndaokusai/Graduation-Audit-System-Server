@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @ConfigurationProperties(prefix = "xxxx") 告诉springboot将本类中的所有属性和配置文件中相关的配置进行绑定,需要先使用@Component加入到容器中。
  */
 @SpringBootApplication
+@MapperScan("com.example.demo.mapper")
 public class DemoApplication {
 
     public static void main(String[] args) {

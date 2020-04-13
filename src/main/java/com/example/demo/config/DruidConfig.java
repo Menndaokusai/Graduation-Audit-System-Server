@@ -20,7 +20,7 @@ public class DruidConfig {
 
         initParams.put("loginUsername","admin");
         initParams.put("loginPassword","admin");
-        initParams.put("allow","192.168.0.1");//IP白名单
+        initParams.put("allow","");//IP白名单
 
         bean.setInitParameters(initParams);
         return bean;
