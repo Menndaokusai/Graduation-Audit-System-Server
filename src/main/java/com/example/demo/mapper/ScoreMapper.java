@@ -1,7 +1,6 @@
 package com.example.demo.mapper;
 
 
-import com.example.demo.model.Replacement;
 import com.example.demo.model.Score;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
