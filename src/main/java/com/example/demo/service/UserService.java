@@ -19,6 +19,6 @@ public interface UserService {
     User select(String account);
 
     //修改一个User
-    int update(String account);
+    int update(User user);
 
 }

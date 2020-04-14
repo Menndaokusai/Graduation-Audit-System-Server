@@ -18,6 +18,6 @@ public interface PunishmentService {
     Punishment select(int punishmentId);
 
     //修改一个Punishment
-    int update(int punishmentId);
+    int update(Punishment punishment);
 
 }

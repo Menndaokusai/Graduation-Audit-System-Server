@@ -19,5 +19,5 @@ public interface Graduation_RequirementService {
     Graduation_Requirement select(int requirementId);
 
     //修改一个Requirement
-    int update(int requirementId);
+    int update(Graduation_Requirement graduation_requirement);
 }

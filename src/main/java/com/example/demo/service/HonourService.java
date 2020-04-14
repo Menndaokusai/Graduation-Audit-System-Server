@@ -19,6 +19,6 @@ public interface HonourService {
     Honour select(int honourId);
 
     //修改一个Honour
-    int update(int honourId);
+    int update(Honour honour);
 
 }

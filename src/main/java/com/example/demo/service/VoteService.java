@@ -13,6 +13,6 @@ public interface VoteService {
     int insert(Vote vote);
 
     //修改一个Vote
-    int update(int voteId);
+    int update(Vote vote);
 
 }

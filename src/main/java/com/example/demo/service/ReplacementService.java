@@ -19,6 +19,6 @@ public interface ReplacementService {
     Replacement selectByreplacementId(int replacementId);
 
     //修改一个Replacement
-    int update(int replacementId);
+    int update(Replacement replacement);
 
 }
