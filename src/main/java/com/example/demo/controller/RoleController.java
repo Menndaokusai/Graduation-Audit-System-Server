@@ -15,7 +15,7 @@ public class RoleController {
 
     @RequestMapping(value = "/roles")
     public String findAll(){
-        List<Role> roles = roleService.selectAllRole();
+        List<Role> roles = roleService.selectAll();
         roles.forEach(System.out::println);
         return roles.toString()+"";
     }

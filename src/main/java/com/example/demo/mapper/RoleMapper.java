@@ -13,6 +13,6 @@ public interface RoleMapper {
 
     //查询所有Role
     @Select("select * from role")
-    List<Role> selectAllRole();
+    List<Role> selectAll();
 
 }

@@ -15,7 +15,7 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public List<Role> selectAllRole() {
-        return roleMapper.selectAllRole();
+    public List<Role> selectAll() {
+        return roleMapper.selectAll();
     }
 }
