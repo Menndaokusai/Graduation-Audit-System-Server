@@ -31,5 +31,5 @@ public interface HonourMapper {
     @Update("update honour set studentId=#{studentId}" +
                             ",honour=#{honour},obtain_time=#{obtain_time}" +
                             ",record_time=#{record_time} where honourId=#{honourId}")
-    int update(int honourId);
+    int update(Honour honour);
 }

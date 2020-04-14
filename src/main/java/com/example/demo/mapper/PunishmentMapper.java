@@ -31,6 +31,6 @@ public interface PunishmentMapper {
     @Update("update punishment set studentId=#{studentId}" +
                                 ",punishment=#{punishment},reason=#{reason}" +
                                 ",record_time=#{record_time} where punishmentId=#{punishmentId}")
-    int update(int punishmentId);
+    int update(Punishment punishment);
 
 }

@@ -29,6 +29,6 @@ public interface VoteMapper {
                         ",agree=#{agree},disagree=#{disagree}" +
                         ",voting_results=#{voting_results},publish_time=#{publish_time}" +
                         ",deadline=#{deadline} where voteId=#{voteId}")
-    int update(int voteId);
+    int update(Vote vote);
 
 }

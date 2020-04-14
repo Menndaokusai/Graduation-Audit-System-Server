@@ -35,5 +35,5 @@ public interface Graduation_RequirementMapper {
                                             ",accum_credit=#{accum_credit},average_score=#{average_score}" +
                                             ",relearn_time=#{relearn_time},punishment_time=#{punishment_time}" +
                                             ",update_time=#{update_time} where requirementId=#{requirementId}")
-    int update(int requirementId);
+    int update(Graduation_Requirement graduation_requirement);
 }

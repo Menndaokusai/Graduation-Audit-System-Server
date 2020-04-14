@@ -29,6 +29,6 @@ public interface UserMapper {
 
     //修改一个User
     @Update("update user set password=#{password},roleId=#{roleId} where account=#{account}")
-    int update(String account);
+    int update(User user);
 
 }

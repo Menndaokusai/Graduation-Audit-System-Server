@@ -40,5 +40,5 @@ public interface ReplacementMapper {
                                 ",replacement_course_b=#{replacement_course_b},replacement_course_b_credit=#{replacement_course_b_credit}" +
                                 ",replacement_course_c=#{replacement_course_c},replacement_course_c_credit=#{replacement_course_c_credit}" +
                                 ",report_time=#{report_time},audit_result=#{audit_result} where replacementId=#{replacementId}")
-    int update(int replacementId);
+    int update(Replacement replacement);
 }
