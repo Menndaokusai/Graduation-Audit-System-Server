@@ -5,6 +5,7 @@ import com.example.demo.model.Message;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.PassToken;
+import com.example.demo.utils.StatusType;
 import com.example.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -35,33 +36,33 @@ public class UserController {
             String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
             if(user.getPassword().equals(md5Password)){
                 String token = TokenUtils.buildJWT(account);
-                return new Message(200,"登录成功",token);
+                return new Message(StatusType.SUCCESS_STATUS,"登录成功",token);
             }
             else{
-                return new Message(404,"用户名或密码不正确");
+                return new Message(StatusType.ERROR_STATUS,"用户名或密码不正确");
             }
         }
 
-        return new Message(404,"用户名或密码不正确");
+        return new Message(StatusType.ERROR_STATUS,"用户名或密码不正确");
 
     }
 
     @RequestMapping("/info")
     public Object getInfo(String account){
         List<Object> users = Collections.singletonList(userService.select(account));
-        return new Message(200,"获取用户信息成功",users);
+        return new Message(StatusType.SUCCESS_STATUS,"获取用户信息成功",users);
     }
 
     @PassToken
     @RequestMapping("/logout")
     public Object logout(){
-        return new Message(200,"登出成功");
+        return new Message(StatusType.SUCCESS_STATUS,"登出成功");
     }
 
     @GetMapping("/list")
     public Object fetchList(){
         List<Object> users = Collections.singletonList(userService.selectAll());
-        return new Message(200,"获取用户列表成功",users);
+        return new Message(StatusType.SUCCESS_STATUS,"获取用户列表成功",users);
     }
 
     @PostMapping("/create")
@@ -73,13 +74,13 @@ public class UserController {
         try{
             int result = userService.insert(user);
             if(result>0){
-                return new Message(200,"创建用户成功");
+                return new Message(StatusType.SUCCESS_STATUS,"创建用户成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new Message(404,"创建用户失败");
+        return new Message(StatusType.ERROR_STATUS,"创建用户失败");
     }
 
     @PostMapping("/update")
@@ -87,13 +88,23 @@ public class UserController {
         User user = new User();
         user.setAccount(account);
         user.setRoleId(roleId);
-        if(!password.equals("")){
-            user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
-            userService.update(user);
-            return new Message(200,"更新用户信息成功");
+        try {
+            if(!password.equals("")){
+                user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+                int result = userService.update(user);
+                if(result>0){
+                    return new Message(StatusType.SUCCESS_STATUS,"更新用户信息成功");
+                }
+                return new Message(StatusType.ERROR_STATUS,"更新用户信息失败");
+            }
+            int result = userService.updateRole(user);
+            if(result>0){
+                return new Message(StatusType.SUCCESS_STATUS,"更新用户角色成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        userService.updateRole(user);
-        return new Message(200,"更新用户角色成功");
+        return new Message(StatusType.ERROR_STATUS,"更新用户角色失败");
     }
 
 }

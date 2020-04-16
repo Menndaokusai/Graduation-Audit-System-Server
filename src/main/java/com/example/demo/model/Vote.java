@@ -4,8 +4,8 @@ public class Vote {
 
     private int voteId;
     private int studentId;
-    private String agree;
-    private String disagree;
+    private int agree;
+    private int disagree;
     private String voting_results;
     private String publish_time;
     private String deadline;
@@ -15,7 +15,7 @@ public class Vote {
     }
 
     public Vote(int voteId, int studentId,
-                String agree, String disagree,
+                int agree, int disagree,
                 String voting_results, String publish_time,
                 String deadline) {
         this.voteId = voteId;
@@ -43,19 +43,19 @@ public class Vote {
         this.studentId = studentId;
     }
 
-    public String getAgree() {
+    public int getAgree() {
         return agree;
     }
 
-    public void setAgree(String agree) {
+    public void setAgree(int agree) {
         this.agree = agree;
     }
 
-    public String getDisagree() {
+    public int getDisagree() {
         return disagree;
     }
 
-    public void setDisagree(String disagree) {
+    public void setDisagree(int disagree) {
         this.disagree = disagree;
     }
 
