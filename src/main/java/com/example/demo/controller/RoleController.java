@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Message;
 import com.example.demo.model.Role;
 import com.example.demo.service.RoleService;
+import com.example.demo.utils.PassToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -14,11 +16,11 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @PassToken
     @PostMapping(value = "/roles")
-    public String findAll(){
-        List<Role> roles = roleService.selectAll();
-        roles.forEach(System.out::println);
-        return roles.toString()+"";
+    public Object findAll(){
+        List<Object> roles = Collections.singletonList(roleService.selectAll());
+        return new Message(200,"获取角色列表成功",roles);
     }
 
 }

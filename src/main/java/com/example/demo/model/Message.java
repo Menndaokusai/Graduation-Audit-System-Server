@@ -7,8 +7,7 @@ public class Message {
     private int code;
     private String message;
     private String token;
-    private List<Object> datas;
-    private Object data;
+    private List<Object> data;
 
     public Message(int code, String message) {
         this.code = code;
@@ -21,13 +20,7 @@ public class Message {
         this.token = token;
     }
 
-    public Message(int code, String message, List<Object> datas) {
-        this.code = code;
-        this.message = message;
-        this.datas = datas;
-    }
-
-    public Message(int code, String message, Object data) {
+    public Message(int code, String message, List<Object> data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -57,19 +50,12 @@ public class Message {
         this.token = token;
     }
 
-    public List<Object> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<Object> datas) {
-        this.datas = datas;
-    }
-
-    public Object getData() {
+    public List<Object> getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(List<Object> data) {
         this.data = data;
     }
+
 }

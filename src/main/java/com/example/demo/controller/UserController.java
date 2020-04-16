@@ -8,11 +8,14 @@ import com.example.demo.utils.PassToken;
 import com.example.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -45,8 +48,8 @@ public class UserController {
 
     @RequestMapping("/info")
     public Object getInfo(String account){
-        User user = userService.select(account);
-        return new Message(200,"获取用户信息成功",user);
+        List<Object> users = Collections.singletonList(userService.select(account));
+        return new Message(200,"获取用户信息成功",users);
     }
 
     @PassToken
@@ -55,5 +58,42 @@ public class UserController {
         return new Message(200,"登出成功");
     }
 
+    @GetMapping("/list")
+    public Object fetchList(){
+        List<Object> users = Collections.singletonList(userService.selectAll());
+        return new Message(200,"获取用户列表成功",users);
+    }
+
+    @PostMapping("/create")
+    public Object createUser(String account,String password,String roleId){
+        User user = new User();
+        user.setAccount(account);
+        user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+        user.setRoleId(roleId);
+        try{
+            int result = userService.insert(user);
+            if(result>0){
+                return new Message(200,"创建用户成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new Message(404,"创建用户失败");
+    }
+
+    @PostMapping("/update")
+    public Object updateUser(String account,String password,String roleId){
+        User user = new User();
+        user.setAccount(account);
+        user.setRoleId(roleId);
+        if(!password.equals("")){
+            user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+            userService.update(user);
+            return new Message(200,"更新用户信息成功");
+        }
+        userService.updateRole(user);
+        return new Message(200,"更新用户角色成功");
+    }
 
 }

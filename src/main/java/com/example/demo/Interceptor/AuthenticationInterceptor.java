@@ -34,11 +34,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 return true;
             }
         }
-        //没有passtoken注释将进行token认证
+        //没有passtoken注解将进行token认证
         // 执行认证
         if (token == null) {
             throw new RuntimeException("无token，请重新登录");
         }
+
         // 验证 token
         String value = TokenUtils.vaildToken(token);
 

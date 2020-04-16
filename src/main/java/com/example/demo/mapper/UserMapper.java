@@ -31,4 +31,8 @@ public interface UserMapper {
     @Update("update user set password=#{password},roleId=#{roleId} where account=#{account}")
     int update(User user);
 
+    //修改一个UserRole
+    @Update("update user set roleId=#{roleId} where account=#{account}")
+    int updateRole(User user);
+
 }

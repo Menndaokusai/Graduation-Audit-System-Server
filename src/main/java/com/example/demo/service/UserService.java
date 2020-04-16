@@ -21,4 +21,7 @@ public interface UserService {
     //修改一个User
     int update(User user);
 
+    //修改一个UserRole
+    int updateRole(User user);
+
 }
