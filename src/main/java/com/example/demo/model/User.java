@@ -4,7 +4,7 @@ public class User {
 
     private String account;
     private String password;
-    private int roleId;
+    private String roleId;
 
     public User(){
 
@@ -26,11 +26,11 @@ public class User {
         this.password = password;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

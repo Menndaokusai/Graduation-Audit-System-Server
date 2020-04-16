@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Role;
 import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/roles")
+    @PostMapping(value = "/roles")
     public String findAll(){
         List<Role> roles = roleService.selectAll();
         roles.forEach(System.out::println);
