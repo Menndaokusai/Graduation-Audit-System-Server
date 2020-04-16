@@ -47,10 +47,16 @@ public class UserController {
 
     }
 
-    @RequestMapping("/info")
+    @GetMapping("/list")
+    public Object fetchList(){
+        List<Object> lists = Collections.singletonList(userService.selectAll());
+        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+    }
+
+    @GetMapping("/info")
     public Object getInfo(String account){
-        List<Object> users = Collections.singletonList(userService.select(account));
-        return new Message(StatusType.SUCCESS_STATUS,"获取用户信息成功",users);
+        List<Object> lists = Collections.singletonList(userService.select(account));
+        return new Message(StatusType.SUCCESS_STATUS,"获取用户信息成功",lists);
     }
 
     @PassToken
@@ -59,11 +65,6 @@ public class UserController {
         return new Message(StatusType.SUCCESS_STATUS,"登出成功");
     }
 
-    @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> users = Collections.singletonList(userService.selectAll());
-        return new Message(StatusType.SUCCESS_STATUS,"获取用户列表成功",users);
-    }
 
     @PostMapping("/create")
     public Object createUser(String account,String password,String roleId){
