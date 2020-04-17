@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Graduation_Requirement;
 import com.example.demo.model.Message;
-import com.example.demo.model.Replacement;
 import com.example.demo.service.Graduation_RequirementService;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +54,8 @@ public class Graduation_RequirementController {
     @PostMapping("/create")
     public Object createRequirement(String enrollment_year,
                                     String major, String system,
-                                    String accum_credit, String average_score,
-                                    String relearn_time, String punishment_time,
+                                    Integer accum_credit, Integer average_score,
+                                    Integer relearn_time, Integer punishment_time,
                                     String update_time){
 
         Graduation_Requirement graduation_requirement = new Graduation_Requirement(0,enrollment_year,
@@ -77,8 +76,8 @@ public class Graduation_RequirementController {
     @PostMapping("/update")
     public Object updateRequirement(int requirementId, String enrollment_year,
                                     String major, String system,
-                                    String accum_credit, String average_score,
-                                    String relearn_time, String punishment_time,
+                                    Integer accum_credit, Integer average_score,
+                                    Integer relearn_time, Integer punishment_time,
                                     String update_time){
 
         Graduation_Requirement graduation_requirement = new Graduation_Requirement(requirementId,enrollment_year,

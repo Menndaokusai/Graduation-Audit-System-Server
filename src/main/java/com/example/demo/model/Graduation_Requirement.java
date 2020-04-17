@@ -6,10 +6,10 @@ public class Graduation_Requirement {
     private String enrollment_year;
     private String major;
     private String system;
-    private String accum_credit;
-    private String average_score;
-    private String relearn_time;
-    private String punishment_time;
+    private Integer accum_credit;
+    private Integer average_score;
+    private Integer relearn_time;
+    private Integer punishment_time;
     private String update_time;
 
     public Graduation_Requirement (){
@@ -18,8 +18,8 @@ public class Graduation_Requirement {
 
     public Graduation_Requirement(int requirementId, String enrollment_year,
                                   String major, String system,
-                                  String accum_credit, String average_score,
-                                  String relearn_time, String punishment_time,
+                                  Integer accum_credit, Integer average_score,
+                                  Integer relearn_time, Integer punishment_time,
                                   String update_time) {
         this.requirementId = requirementId;
         this.enrollment_year = enrollment_year;
@@ -64,35 +64,35 @@ public class Graduation_Requirement {
         this.system = system;
     }
 
-    public String getAccum_credit() {
+    public Integer getAccum_credit() {
         return accum_credit;
     }
 
-    public void setAccum_credit(String accum_credit) {
+    public void setAccum_credit(Integer accum_credit) {
         this.accum_credit = accum_credit;
     }
 
-    public String getAverage_score() {
+    public Integer getAverage_score() {
         return average_score;
     }
 
-    public void setAverage_score(String average_score) {
+    public void setAverage_score(Integer average_score) {
         this.average_score = average_score;
     }
 
-    public String getRelearn_time() {
+    public Integer getRelearn_time() {
         return relearn_time;
     }
 
-    public void setRelearn_time(String relearn_time) {
+    public void setRelearn_time(Integer relearn_time) {
         this.relearn_time = relearn_time;
     }
 
-    public String getPunishment_time() {
+    public Integer getPunishment_time() {
         return punishment_time;
     }
 
-    public void setPunishment_time(String punishment_time) {
+    public void setPunishment_time(Integer punishment_time) {
         this.punishment_time = punishment_time;
     }
 
