@@ -10,10 +10,10 @@ public class Score {
     private String academic_year;
     private String term;
     private String course_name;
-    private String credit;
-    private String score;
-    private String retry_score;
-    private String relearn_score;
+    private Double credit;
+    private Double score;
+    private Double retry_score;
+    private Double relearn_score;
 
     public Score (){
 
@@ -23,8 +23,8 @@ public class Score {
                  String studentName, String studentClass,
                  String college, String academic_year,
                  String term, String course_name,
-                 String credit, String score,
-                 String retry_score, String relearn_score) {
+                 Double credit, Double score,
+                 Double retry_score, Double relearn_score) {
         this.scoreId = scoreId;
         this.studentId = studentId;
         this.studentName = studentName;
@@ -103,35 +103,35 @@ public class Score {
         this.course_name = course_name;
     }
 
-    public String getCredit() {
+    public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(String credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
     }
 
-    public String getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
-    public String getRetry_score() {
+    public Double getRetry_score() {
         return retry_score;
     }
 
-    public void setRetry_score(String retry_score) {
+    public void setRetry_score(Double retry_score) {
         this.retry_score = retry_score;
     }
 
-    public String getRelearn_score() {
+    public Double getRelearn_score() {
         return relearn_score;
     }
 
-    public void setRelearn_score(String relearn_score) {
+    public void setRelearn_score(Double relearn_score) {
         this.relearn_score = relearn_score;
     }
 

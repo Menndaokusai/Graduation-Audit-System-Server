@@ -19,7 +19,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
-        String token = httpServletRequest.getHeader("token");// 从 http 请求头中取出 token
 
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod)) {
@@ -34,6 +33,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 return true;
             }
         }
+
+        String token = httpServletRequest.getHeader("token");// 从 http 请求头中取出 token
+
         //没有passtoken注解将进行token认证
         // 执行认证
         if (token == null) {

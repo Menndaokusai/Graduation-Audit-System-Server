@@ -8,6 +8,7 @@ public class Message {
     private String message;
     private String token;
     private List<Object> data;
+    private String roles;
 
     public Message(int code, String message) {
         this.code = code;

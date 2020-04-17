@@ -19,9 +19,9 @@ public class TokenUtils {
     private static final byte[] SECRET = "6MNSobBRCHGIO0fS6MNSobBRCHGIO0fS".getBytes();
 
     /**
-     * 过期时间3600秒
+     * 过期时间360000秒
      */
-    private static final long EXPIRE_TIME = 1000 * 3600;
+    private static final long EXPIRE_TIME = 1000 * 360000;
 
 
     /**
@@ -71,6 +71,7 @@ public class TokenUtils {
      * @return
      */
     public static String vaildToken(String token ) {
+
         try {
             SignedJWT jwt = SignedJWT.parse(token);
             JWSVerifier verifier = new MACVerifier(SECRET);

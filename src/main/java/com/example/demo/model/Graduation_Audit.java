@@ -5,8 +5,8 @@ public class Graduation_Audit {
     private int studentId;
     private String studentName;
     private String studentClass;
-    private Integer accum_credit;
-    private Integer average_score;
+    private Double accum_credit;
+    private Double average_score;
     private Integer relearn_time;
     private Integer punishment_time;
     private String voting_results;
@@ -16,8 +16,8 @@ public class Graduation_Audit {
     }
 
     public Graduation_Audit(int studentId, String studentName,
-                            String studentClass, Integer accum_credit,
-                            Integer average_score, Integer relearn_time,
+                            String studentClass, Double accum_credit,
+                            Double average_score, Integer relearn_time,
                             Integer punishment_time, String voting_results) {
         this.studentId = studentId;
         this.studentName = studentName;
@@ -53,19 +53,19 @@ public class Graduation_Audit {
         this.studentClass = studentClass;
     }
 
-    public Integer getAccum_credit() {
+    public Double getAccum_credit() {
         return accum_credit;
     }
 
-    public void setAccum_credit(Integer accum_credit) {
+    public void setAccum_credit(Double accum_credit) {
         this.accum_credit = accum_credit;
     }
 
-    public Integer getAverage_score() {
+    public Double getAverage_score() {
         return average_score;
     }
 
-    public void setAverage_score(Integer average_score) {
+    public void setAverage_score(Double average_score) {
         this.average_score = average_score;
     }
 

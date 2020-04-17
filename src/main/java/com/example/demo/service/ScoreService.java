@@ -12,4 +12,10 @@ public interface ScoreService {
     //查询一个学生的Score
     List<Score> selectBystudentId(int studentId);
 
+    //创建一个Score
+    int insert(Score score);
+
+    //删除全部Score
+    int deleteAll();
+
 }

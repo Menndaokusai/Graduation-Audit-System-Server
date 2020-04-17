@@ -22,4 +22,16 @@ public class ScoreServiceImpl implements ScoreService{
     public List<Score> selectBystudentId(int studentId) {
         return scoreMapper.selectBystudentId(studentId);
     }
+
+    @Override
+    public int insert(Score score) {
+        return scoreMapper.insert(score);
+    }
+
+    @Override
+    public int deleteAll() {
+        return scoreMapper.deleteAll();
+    }
+
+
 }

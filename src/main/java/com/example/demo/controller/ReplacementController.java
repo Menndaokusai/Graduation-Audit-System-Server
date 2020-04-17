@@ -37,11 +37,11 @@ public class ReplacementController {
 
     @PostMapping("/create")
     public Object createReplacement(int studentId,
-                             String original_course, String original_course_credit,
-                             String replacement_course_a, String replacement_course_a_credit,
-                             String replacement_course_b, String replacement_course_b_credit,
-                             String replacement_course_c, String replacement_course_c_credit,
-                             String report_time, String audit_result){
+                                    String original_course, Double original_course_credit,
+                                    String replacement_course_a, Double replacement_course_a_credit,
+                                    String replacement_course_b, Double replacement_course_b_credit,
+                                    String replacement_course_c, Double replacement_course_c_credit,
+                                    String report_time, String audit_result){
 
         Replacement replacement = new Replacement(0,studentId,
                 original_course,original_course_credit,
@@ -63,10 +63,10 @@ public class ReplacementController {
 
     @PostMapping("/update")
     public Object updateReplacement(int replacementId, int studentId,
-                                    String original_course, String original_course_credit,
-                                    String replacement_course_a, String replacement_course_a_credit,
-                                    String replacement_course_b, String replacement_course_b_credit,
-                                    String replacement_course_c, String replacement_course_c_credit,
+                                    String original_course, Double original_course_credit,
+                                    String replacement_course_a, Double replacement_course_a_credit,
+                                    String replacement_course_b, Double replacement_course_b_credit,
+                                    String replacement_course_c, Double replacement_course_c_credit,
                                     String report_time, String audit_result){
 
         Replacement replacement = new Replacement(replacementId,studentId,

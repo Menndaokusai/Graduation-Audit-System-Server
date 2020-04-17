@@ -2,20 +2,20 @@ package com.example.demo.model;
 
 public class User {
 
-    private String account;
+    private String username;
     private String password;
-    private String roleId;
+    private String roles;
 
     public User(){
 
     }
 
-    public String getAccount() {
-        return account;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -26,20 +26,20 @@ public class User {
         this.password = password;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "account='" + account + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", roleId=" + roleId +
+                ", roleId=" + roles +
                 '}';
     }
 }

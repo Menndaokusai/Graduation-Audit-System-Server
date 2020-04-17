@@ -54,7 +54,7 @@ public class Graduation_RequirementController {
     @PostMapping("/create")
     public Object createRequirement(String enrollment_year,
                                     String major, String system,
-                                    Integer accum_credit, Integer average_score,
+                                    Double accum_credit, Double average_score,
                                     Integer relearn_time, Integer punishment_time,
                                     String update_time){
 
@@ -76,7 +76,7 @@ public class Graduation_RequirementController {
     @PostMapping("/update")
     public Object updateRequirement(int requirementId, String enrollment_year,
                                     String major, String system,
-                                    Integer accum_credit, Integer average_score,
+                                    Double accum_credit, Double average_score,
                                     Integer relearn_time, Integer punishment_time,
                                     String update_time){
 

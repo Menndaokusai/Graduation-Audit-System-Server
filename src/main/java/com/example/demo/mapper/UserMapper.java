@@ -16,23 +16,23 @@ public interface UserMapper {
     List<User> selectAll();
 
     //增加一个User
-    @Insert("insert into user values(#{account},#{password},#{roleId})")
+    @Insert("insert into user values(#{username},#{password},#{roleId})")
     int insert(User user);
 
     //删除一个User
-    @Delete("delete from user where account=#{account}")
+    @Delete("delete from user where username=#{username}")
     int delete(String account);
 
     //查询一个User
-    @Select("select * from user where account=#{account}")
+    @Select("select * from user where username=#{username}")
     User select(String account);
 
     //修改一个User
-    @Update("update user set password=#{password},roleId=#{roleId} where account=#{account}")
+    @Update("update user set password=#{password},roleId=#{roleId} where username=#{username}")
     int update(User user);
 
     //修改一个UserRole
-    @Update("update user set roleId=#{roleId} where account=#{account}")
+    @Update("update user set roleId=#{roleId} where username=#{username}")
     int updateRole(User user);
 
 }

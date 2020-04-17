@@ -6,8 +6,8 @@ public class Graduation_Requirement {
     private String enrollment_year;
     private String major;
     private String system;
-    private Integer accum_credit;
-    private Integer average_score;
+    private Double accum_credit;
+    private Double average_score;
     private Integer relearn_time;
     private Integer punishment_time;
     private String update_time;
@@ -18,7 +18,7 @@ public class Graduation_Requirement {
 
     public Graduation_Requirement(int requirementId, String enrollment_year,
                                   String major, String system,
-                                  Integer accum_credit, Integer average_score,
+                                  Double accum_credit, Double average_score,
                                   Integer relearn_time, Integer punishment_time,
                                   String update_time) {
         this.requirementId = requirementId;
@@ -64,19 +64,19 @@ public class Graduation_Requirement {
         this.system = system;
     }
 
-    public Integer getAccum_credit() {
+    public Double getAccum_credit() {
         return accum_credit;
     }
 
-    public void setAccum_credit(Integer accum_credit) {
+    public void setAccum_credit(Double accum_credit) {
         this.accum_credit = accum_credit;
     }
 
-    public Integer getAverage_score() {
+    public Double getAverage_score() {
         return average_score;
     }
 
-    public void setAverage_score(Integer average_score) {
+    public void setAverage_score(Double average_score) {
         this.average_score = average_score;
     }
 

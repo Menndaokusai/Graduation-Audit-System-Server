@@ -9,10 +9,7 @@ import com.example.demo.utils.StatusType;
 import com.example.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collections;
@@ -28,14 +25,15 @@ public class UserController {
 
     @PassToken
     @PostMapping("/login")
-    public Object login(String account, String password){
+    public Object login(@RequestBody User user){
 
-        User user = userService.select(account);
+        User uuser = userService.select(user.getUsername());
 
-        if(user!=null){
-            String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
-            if(user.getPassword().equals(md5Password)){
-                String token = TokenUtils.buildJWT(account);
+        if(uuser!=null){
+            String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+            if(uuser.getPassword().equals(md5Password)){
+                String token = TokenUtils.buildJWT(uuser.getUsername());
+
                 return new Message(StatusType.SUCCESS_STATUS,"登录成功",token);
             }
             else{
@@ -54,8 +52,8 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public Object getInfo(String account){
-        List<Object> lists = Collections.singletonList(userService.select(account));
+    public Object getInfo(String username){
+        List<Object> lists = Collections.singletonList(userService.select(username));
         return new Message(StatusType.SUCCESS_STATUS,"获取用户信息成功",lists);
     }
 
@@ -67,11 +65,11 @@ public class UserController {
 
 
     @PostMapping("/create")
-    public Object createUser(String account,String password,String roleId){
+    public Object createUser(String username,String password,String roleId){
         User user = new User();
-        user.setAccount(account);
+        user.setUsername(username);
         user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
-        user.setRoleId(roleId);
+        user.setRoles(roleId);
         try{
             int result = userService.insert(user);
             if(result>0){
@@ -85,10 +83,10 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Object updateUser(String account,String password,String roleId){
+    public Object updateUser(String username,String password,String roleId){
         User user = new User();
-        user.setAccount(account);
-        user.setRoleId(roleId);
+        user.setUsername(username);
+        user.setRoles(roleId);
         try {
             if(!password.equals("")){
                 user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
