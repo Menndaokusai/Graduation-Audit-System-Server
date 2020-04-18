@@ -14,8 +14,13 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
     Graduation_AuditMapper graduation_auditMapper;
 
     @Override
-    public List<Graduation_Audit> selectAll() {
-        return graduation_auditMapper.selectAll();
+    public List<Graduation_Audit> selectAll(int start,int limit) {
+        return graduation_auditMapper.selectAll(start,limit);
+    }
+
+    @Override
+    public List<Graduation_Audit> selectBysId(String studentId, int start, int limit) {
+        return graduation_auditMapper.selectBysId(studentId,start,limit);
     }
 
 }

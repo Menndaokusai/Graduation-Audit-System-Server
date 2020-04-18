@@ -7,7 +7,10 @@ import java.util.List;
 public interface Graduation_RequirementService {
 
     //查询所有Requirement
-    List<Graduation_Requirement> selectAll();
+    List<Graduation_Requirement> selectAll(int start,int limit);
+
+    //查询该入学年份的Requirement
+    List<Graduation_Requirement> selectByYear(String enrollment_year,int start,int limit);
 
     //增加一个Requirement
     int insert(Graduation_Requirement graduation_requirement);

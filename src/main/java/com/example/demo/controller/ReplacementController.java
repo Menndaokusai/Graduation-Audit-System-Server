@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.model.Replacement;
 import com.example.demo.service.ReplacementService;
 import com.example.demo.utils.StatusType;
@@ -22,10 +23,18 @@ public class ReplacementController {
     ReplacementService replacementService;
 
     @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> lists = Collections.singletonList(replacementService.selectAll());
+    public Object fetchList(String studentId, int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(studentId==null||studentId.equals("")){
+            lists = Collections.singletonList(replacementService.selectAll(start,limit));
+        }
+        else {
+            lists = Collections.singletonList(replacementService.selectBystudentId(studentId,start,limit));
+        }
 
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+        int total=lists.size();
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
     @GetMapping("/detail")
@@ -36,7 +45,7 @@ public class ReplacementController {
     }
 
     @PostMapping("/create")
-    public Object createReplacement(int studentId,
+    public Object createReplacement(String studentId,
                                     String original_course, Double original_course_credit,
                                     String replacement_course_a, Double replacement_course_a_credit,
                                     String replacement_course_b, Double replacement_course_b_credit,
@@ -62,7 +71,7 @@ public class ReplacementController {
     }
 
     @PostMapping("/update")
-    public Object updateReplacement(int replacementId, int studentId,
+    public Object updateReplacement(int replacementId, String studentId,
                                     String original_course, Double original_course_credit,
                                     String replacement_course_a, Double replacement_course_a_credit,
                                     String replacement_course_b, Double replacement_course_b_credit,

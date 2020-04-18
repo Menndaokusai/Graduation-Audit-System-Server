@@ -14,13 +14,13 @@ public class ReplacementServiceImpl implements ReplacementService{
     ReplacementMapper replacementMapper;
 
     @Override
-    public List<Replacement> selectAll() {
-        return replacementMapper.selectAll();
+    public List<Replacement> selectAll(int start,int limit) {
+        return replacementMapper.selectAll(start, limit);
     }
 
     @Override
-    public List<Replacement> selectBystudentId(int studentId) {
-        return replacementMapper.selectBystudentId(studentId);
+    public List<Replacement> selectBystudentId(String studentId,int start,int limit) {
+        return replacementMapper.selectBystudentId(studentId,start,limit);
     }
 
     @Override

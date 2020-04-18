@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class Vote {
 
     private int voteId;
-    private int studentId;
+    private String studentId;
     private int agree;
     private int disagree;
     private String voting_results;
@@ -14,7 +14,7 @@ public class Vote {
 
     }
 
-    public Vote(int voteId, int studentId,
+    public Vote(int voteId, String studentId,
                 int agree, int disagree,
                 String voting_results, String publish_time,
                 String deadline) {
@@ -35,11 +35,11 @@ public class Vote {
         this.voteId = voteId;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 

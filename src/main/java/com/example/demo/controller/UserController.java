@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.PassToken;
@@ -46,9 +47,19 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> lists = Collections.singletonList(userService.selectAll());
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+    public Object fetchList(String username,int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(username==null){
+            lists = Collections.singletonList(userService.selectAll(start,limit));
+        }
+        else{
+            lists = Collections.singletonList(userService.select(username));
+        }
+
+        int total=((List)lists.get(0)).size();
+
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
     @GetMapping("/info")
@@ -65,11 +76,8 @@ public class UserController {
 
 
     @PostMapping("/create")
-    public Object createUser(String username,String password,String roleId){
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
-        user.setRoles(roleId);
+    public Object createUser(@RequestBody User user){
+        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
         try{
             int result = userService.insert(user);
             if(result>0){
@@ -83,13 +91,10 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Object updateUser(String username,String password,String roleId){
-        User user = new User();
-        user.setUsername(username);
-        user.setRoles(roleId);
+    public Object updateUser(@RequestBody User user){
         try {
-            if(!password.equals("")){
-                user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+            if(!user.getPassword().equals("")){
+                user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
                 int result = userService.update(user);
                 if(result>0){
                     return new Message(StatusType.SUCCESS_STATUS,"更新用户信息成功");
@@ -104,6 +109,21 @@ public class UserController {
             e.printStackTrace();
         }
         return new Message(StatusType.ERROR_STATUS,"更新用户角色失败");
+    }
+
+    @PostMapping("/delete")
+    public Object deleteUser(@RequestBody User user){
+
+        try {
+            int result = userService.delete(user.getUsername());
+            if(result>0){
+                return new Message(StatusType.SUCCESS_STATUS,"删除成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new Message(StatusType.ERROR_STATUS,"删除失败");
     }
 
 }

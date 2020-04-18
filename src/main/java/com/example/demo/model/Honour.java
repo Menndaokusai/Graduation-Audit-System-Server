@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class Honour {
 
     private int honourId;
-    private int studentId;
+    private String studentId;
     private String honour;
     private String obtain_time;
     private String record_time;
@@ -12,7 +12,7 @@ public class Honour {
 
     }
 
-    public Honour(int honourId, int studentId, String honour, String obtain_time, String record_time) {
+    public Honour(int honourId, String studentId, String honour, String obtain_time, String record_time) {
         this.honourId = honourId;
         this.studentId = studentId;
         this.honour = honour;
@@ -28,11 +28,11 @@ public class Honour {
         this.honourId = honourId;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 

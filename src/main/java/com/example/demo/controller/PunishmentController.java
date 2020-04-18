@@ -2,14 +2,13 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.model.Punishment;
 import com.example.demo.service.PunishmentService;
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,19 +21,31 @@ public class PunishmentController {
     PunishmentService punishmentService;
 
     @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> lists = Collections.singletonList(punishmentService.selectAll());
+    public Object fetchList(String studentId,int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(studentId==null||studentId.equals("")){
+            lists = Collections.singletonList(punishmentService.selectAll(start,limit));
+        }
+        else{
+            lists = Collections.singletonList(punishmentService.select(Integer.parseInt(studentId)));
+        }
 
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+        int total=lists.size();
+
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
 
     @PostMapping("/create")
-    public Object createPunishment(int studentId, String punishment, String reason, String record_time){
+    public Object createPunishment(@RequestBody Punishment punishment){
 
-        Punishment ppunishment = new Punishment(0,studentId, punishment,reason, record_time);
+        String record_time = DateUtils.getDate();
+
+        punishment.setRecord_time(record_time);
+
         try {
-            int result = punishmentService.insert(ppunishment);
+            int result = punishmentService.insert(punishment);
             if(result>0){
                 return new Message(StatusType.SUCCESS_STATUS,"创建成功");
             }

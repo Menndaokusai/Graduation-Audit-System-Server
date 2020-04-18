@@ -12,13 +12,17 @@ import java.util.List;
 @Mapper
 public interface ScoreMapper {
 
+    //获取Score_Copy的数据
+    @Select("select * from score_copy")
+    List<Score> getData();
+
     //查询所有Score
-    @Select("select * from score")
-    List<Score> selectAll();
+    @Select("select * from score limit #{start},#{limit}")
+    List<Score> selectAll(int start,int limit);
 
     //查询一个学生的Score
-    @Select("select * from score where studentId=#{studentId}")
-    List<Score> selectBystudentId(int studentId);
+    @Select("select * from score where studentId=#{studentId} limit #{start},#{limit}")
+    List<Score> selectBystudentId(String studentId,int start,int limit);
 
     //创建Score
     @Insert("insert into score values(#{scoreId},#{studentId},#{studentName}" +

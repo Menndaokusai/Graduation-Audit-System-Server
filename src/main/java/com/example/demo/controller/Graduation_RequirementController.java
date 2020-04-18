@@ -2,13 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Graduation_Requirement;
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.service.Graduation_RequirementService;
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
+import com.nimbusds.jose.Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,10 +22,17 @@ public class Graduation_RequirementController {
     Graduation_RequirementService graduation_requirementService;
 
     @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> lists = Collections.singletonList(graduation_requirementService.selectAll());
-
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+    public Object fetchList(String enrollment_year,int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(enrollment_year==null||enrollment_year.equals("")){
+            lists = Collections.singletonList(graduation_requirementService.selectAll(start,limit));
+        }
+        else {
+            lists = Collections.singletonList(graduation_requirementService.selectByYear(enrollment_year,start,limit));
+        }
+        int total=lists.size();
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
 
@@ -37,10 +44,10 @@ public class Graduation_RequirementController {
     }
 
     @PostMapping("/delete")
-    public Object delete(int requirementId){
+    public Object delete(@RequestBody Graduation_Requirement graduation_requirement){
 
         try {
-            int result = graduation_requirementService.delete(requirementId);
+            int result = graduation_requirementService.delete(graduation_requirement.getRequirementId());
             if(result>0){
                 return new Message(StatusType.SUCCESS_STATUS,"删除成功");
             }
@@ -52,15 +59,10 @@ public class Graduation_RequirementController {
     }
 
     @PostMapping("/create")
-    public Object createRequirement(String enrollment_year,
-                                    String major, String system,
-                                    Double accum_credit, Double average_score,
-                                    Integer relearn_time, Integer punishment_time,
-                                    String update_time){
+    public Object createRequirement(@RequestBody Graduation_Requirement graduation_requirement){
 
-        Graduation_Requirement graduation_requirement = new Graduation_Requirement(0,enrollment_year,
-                major,system, accum_credit,average_score,
-                relearn_time,punishment_time, update_time);
+        graduation_requirement.setRequirementId(0);
+        graduation_requirement.setUpdate_time(DateUtils.getDate());
         try{
             int result = graduation_requirementService.insert(graduation_requirement);
             if(result>0){
@@ -74,15 +76,7 @@ public class Graduation_RequirementController {
     }
 
     @PostMapping("/update")
-    public Object updateRequirement(int requirementId, String enrollment_year,
-                                    String major, String system,
-                                    Double accum_credit, Double average_score,
-                                    Integer relearn_time, Integer punishment_time,
-                                    String update_time){
-
-        Graduation_Requirement graduation_requirement = new Graduation_Requirement(requirementId,enrollment_year,
-                                                                                    major,system, accum_credit,average_score,
-                                                                                    relearn_time,punishment_time, update_time);
+    public Object updateRequirement(@RequestBody Graduation_Requirement graduation_requirement){
         try{
             int result = graduation_requirementService.update(graduation_requirement);
             if(result>0){

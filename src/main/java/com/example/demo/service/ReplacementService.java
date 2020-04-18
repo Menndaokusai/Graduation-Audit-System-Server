@@ -7,10 +7,10 @@ import java.util.List;
 public interface ReplacementService {
 
     //查询所有Replacement
-    List<Replacement> selectAll();
+    List<Replacement> selectAll(int start,int limit);
 
     //查询一个学生的Replacement
-    List<Replacement> selectBystudentId(int studentId);
+    List<Replacement> selectBystudentId(String studentId,int start,int limit);
 
     //增加一个Replacement
     int insert(Replacement replacement);

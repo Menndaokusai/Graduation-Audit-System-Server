@@ -1,16 +1,17 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.Graduation_Audit;
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.model.Vote;
 import com.example.demo.service.VoteService;
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,20 +24,27 @@ public class VoteController {
 
 
     @GetMapping("/list")
-    public Object fetchList(){
-
-        List<Object> lists = Collections.singletonList(voteService.selectAll());
-
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+    public Object fetchList(String studentId,int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(studentId==null||studentId.equals("")){
+            lists = Collections.singletonList(voteService.selectAll(start,limit));
+        }
+        else {
+            lists = Collections.singletonList(voteService.selectBysId(studentId,start,limit));
+        }
+        int total=lists.size();
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
     @PostMapping("/create")
-    public Object createVote(int studentId,
-                             Integer agree, Integer disagree,
-                             String voting_results, String publish_time,
-                             String deadline){
-
-        Vote vote = new Vote(0,studentId,agree,disagree,voting_results,publish_time,deadline);
+    public Object createVote(@RequestBody Vote vote){
+        String publish_time = DateUtils.getDate();
+        vote.setVoteId(0);
+        vote.setAgree(0);
+        vote.setDisagree(0);
+        vote.setVoting_results("审核中");
+        vote.setPublish_time(publish_time);
         try {
             int result = voteService.insert(vote);
             if(result>0){
@@ -51,7 +59,7 @@ public class VoteController {
 
 
     @PostMapping("/update")
-    public Object updateVote(int voteId, int studentId,
+    public Object updateVote(int voteId, String studentId,
                              int agree, int disagree,
                              String voting_results, String publish_time,
                              String deadline){

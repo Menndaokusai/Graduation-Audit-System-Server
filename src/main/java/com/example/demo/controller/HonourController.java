@@ -2,13 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Honour;
 import com.example.demo.model.Message;
+import com.example.demo.model.PageList;
 import com.example.demo.service.HonourService;
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,10 +20,17 @@ public class HonourController {
     HonourService honourService;
 
     @GetMapping("/list")
-    public Object fetchList(){
-        List<Object> lists = Collections.singletonList(honourService.selectAll());
-
-        return new Message(StatusType.SUCCESS_STATUS,"获取列表成功",lists);
+    public Object fetchList(String studentId,int page,int limit){
+        int start = (page-1)*limit;
+        List<Object> lists;
+        if(studentId==null||studentId.equals("")){
+            lists = Collections.singletonList(honourService.selectAll(start,limit));
+        }
+        else{
+            lists = Collections.singletonList(honourService.selectBysId(studentId,start,limit));
+        }
+        int total=lists.size();
+        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
     }
 
     @GetMapping("/detail")
@@ -35,11 +41,13 @@ public class HonourController {
     }
 
     @PostMapping("/create")
-    public Object createHonour(int studentId, String honour, String obtain_time, String record_time){
+    public Object createHonour(@RequestBody Honour honour){
 
-        Honour hhonour = new Honour(0,studentId,honour,obtain_time,record_time);
+        String record_time = DateUtils.getDate();
+        honour.setRecord_time(record_time);
+
         try {
-            int result = honourService.insert(hhonour);
+            int result = honourService.insert(honour);
             if(result>0){
                 return new Message(StatusType.SUCCESS_STATUS,"创建成功");
             }
@@ -51,7 +59,7 @@ public class HonourController {
     }
 
     @PostMapping("/update")
-    public Object updateHonour(int honourId, int studentId, String honour, String obtain_time, String record_time){
+    public Object updateHonour(int honourId, String studentId, String honour, String obtain_time, String record_time){
 
         Honour hhonour = new Honour(honourId,studentId,honour,obtain_time,record_time);
 

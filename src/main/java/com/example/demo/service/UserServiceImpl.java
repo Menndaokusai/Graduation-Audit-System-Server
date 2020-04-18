@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService{
     UserMapper userMapper;
 
     @Override
-    public List<User> selectAll() {
-        return userMapper.selectAll();
+    public List<User> selectAll(int start,int limit) {
+        return userMapper.selectAll(start, limit);
     }
 
     @Override
@@ -25,13 +25,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int delete(String account) {
-        return userMapper.delete(account);
+    public int delete(String username) {
+        return userMapper.delete(username);
     }
 
     @Override
-    public User select(String account) {
-        return userMapper.select(account);
+    public User select(String username) {
+        return userMapper.select(username);
     }
 
     @Override

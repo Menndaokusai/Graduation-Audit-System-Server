@@ -15,8 +15,8 @@ public class HonourServiceImpl implements HonourService{
     HonourMapper honourMapper;
 
     @Override
-    public List<Honour> selectAll() {
-        return honourMapper.selectAll();
+    public List<Honour> selectAll(int start,int limit) {
+        return honourMapper.selectAll(start, limit);
     }
 
     @Override
@@ -32,6 +32,11 @@ public class HonourServiceImpl implements HonourService{
     @Override
     public Honour select(int honourId) {
         return honourMapper.select(honourId);
+    }
+
+    @Override
+    public List<Honour> selectBysId(String studentId, int start, int limit) {
+        return honourMapper.selectBysId(studentId,start,limit);
     }
 
     @Override

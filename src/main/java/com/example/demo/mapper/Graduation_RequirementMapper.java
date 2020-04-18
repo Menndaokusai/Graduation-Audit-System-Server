@@ -12,8 +12,12 @@ import java.util.List;
 public interface Graduation_RequirementMapper {
 
     //查询所有Requirement
-    @Select("select * from graduation_requirement")
-    List<Graduation_Requirement> selectAll();
+    @Select("select * from graduation_requirement limit #{start},#{limit}")
+    List<Graduation_Requirement> selectAll(int start,int limit);
+
+    //查询该入学年份的Requirement
+    @Select("select * from graduation_requirement where enrollment_year=#{enrollment_year} limit #{start},#{limit}")
+    List<Graduation_Requirement> selectByYear(String enrollment_year,int start,int limit);
 
     //增加一个Requirement
     @Insert("insert into graduation_requirement values(#{requirementId},#{enrollment_year},#{major}" +

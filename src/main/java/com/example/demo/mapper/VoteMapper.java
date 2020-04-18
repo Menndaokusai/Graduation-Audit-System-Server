@@ -15,8 +15,12 @@ import java.util.List;
 public interface VoteMapper {
 
     //查询所有Vote
-    @Select("select * from vote")
-    List<Vote> selectAll();
+    @Select("select * from vote limit #{start},#{limit}")
+    List<Vote> selectAll(int start,int limit);
+
+    //查询所有Vote
+    @Select("select * from vote where studentId=#{studentId} limit #{start},#{limit}")
+    List<Vote> selectBysId(String studentId,int start,int limit);
 
     //增加一个Vote
     @Insert("insert into vote values(#{voteId},#{studentId},#{agree}" +

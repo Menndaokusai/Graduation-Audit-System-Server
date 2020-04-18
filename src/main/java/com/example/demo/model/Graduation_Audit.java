@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 public class Graduation_Audit {
 
-    private int studentId;
+    private String studentId;
     private String studentName;
     private String studentClass;
     private Double accum_credit;
@@ -15,7 +15,7 @@ public class Graduation_Audit {
 
     }
 
-    public Graduation_Audit(int studentId, String studentName,
+    public Graduation_Audit(String studentId, String studentName,
                             String studentClass, Double accum_credit,
                             Double average_score, Integer relearn_time,
                             Integer punishment_time, String voting_results) {
@@ -29,11 +29,11 @@ public class Graduation_Audit {
         this.voting_results = voting_results;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 

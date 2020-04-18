@@ -14,13 +14,18 @@ public class ScoreServiceImpl implements ScoreService{
     ScoreMapper scoreMapper;
 
     @Override
-    public List<Score> selectAll() {
-        return scoreMapper.selectAll();
+    public List<Score> getData() {
+        return scoreMapper.getData();
     }
 
     @Override
-    public List<Score> selectBystudentId(int studentId) {
-        return scoreMapper.selectBystudentId(studentId);
+    public List<Score> selectAll(int start,int limit) {
+        return scoreMapper.selectAll(start, limit);
+    }
+
+    @Override
+    public List<Score> selectBystudentId(String studentId,int start,int limit) {
+        return scoreMapper.selectBystudentId(studentId,start,limit);
     }
 
     @Override

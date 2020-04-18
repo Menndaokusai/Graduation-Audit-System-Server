@@ -11,8 +11,8 @@ import java.util.List;
 public interface PunishmentMapper {
 
     //查询所有Punishment
-    @Select("select * from punishment")
-    List<Punishment> selectAll();
+    @Select("select * from punishment limit #{start},#{limit}")
+    List<Punishment> selectAll(int start,int limit);
 
     //增加一个Punishment
     @Insert("insert into punishment values(#{punishmentId},#{studentId},#{punishment}" +
@@ -23,9 +23,9 @@ public interface PunishmentMapper {
     @Delete("delete from punishment where punishmentId=#{punishmentId}")
     int delete(int punishmentId);
 
-    //查询一个Punishment
-    @Select("select * from punishment where punishmentId=#{punishmentId}")
-    Punishment select(int punishmentId);
+    //查询一个学生的Punishment
+    @Select("select * from punishment where studentId=#{studentId}")
+    Punishment select(int studentId);
 
     //修改一个Punishment
     @Update("update punishment set studentId=#{studentId}" +

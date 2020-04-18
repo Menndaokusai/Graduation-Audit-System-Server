@@ -6,7 +6,7 @@ import java.util.List;
 public interface PunishmentService {
 
     //查询所有Punishment
-    List<Punishment> selectAll();
+    List<Punishment> selectAll(int start,int limit);
 
     //增加一个Punishment
     int insert(Punishment punishment);
@@ -14,8 +14,8 @@ public interface PunishmentService {
     //删除一个Punishment
     int delete(int punishmentId);
 
-    //查询一个Punishment
-    Punishment select(int punishmentId);
+    //查询一个学生的Punishment
+    Punishment select(int studentId);
 
     //修改一个Punishment
     int update(Punishment punishment);

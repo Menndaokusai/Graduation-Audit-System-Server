@@ -15,8 +15,13 @@ public class VoteServiceImpl implements VoteService{
     VoteMapper voteMapper;
 
     @Override
-    public List<Vote> selectAll() {
-        return voteMapper.selectAll();
+    public List<Vote> selectAll(int start,int limit) {
+        return voteMapper.selectAll(start, limit);
+    }
+
+    @Override
+    public List<Vote> selectBysId(String studentId, int start, int limit) {
+        return voteMapper.selectBysId(studentId,start,limit);
     }
 
     @Override

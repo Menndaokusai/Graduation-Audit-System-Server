@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class Score {
 
     private int scoreId;
-    private int studentId;
+    private String studentId;
     private String studentName;
     private String studentClass;
     private String college;
@@ -19,7 +19,7 @@ public class Score {
 
     }
 
-    public Score(int scoreId, int studentId,
+    public Score(int scoreId, String studentId,
                  String studentName, String studentClass,
                  String college, String academic_year,
                  String term, String course_name,
@@ -47,11 +47,11 @@ public class Score {
         this.scoreId = scoreId;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 

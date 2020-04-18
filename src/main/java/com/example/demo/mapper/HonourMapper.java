@@ -11,8 +11,8 @@ import java.util.List;
 public interface HonourMapper {
 
     //查询所有Honour
-    @Select("select * from honour")
-    List<Honour> selectAll();
+    @Select("select * from honour limit #{start},#{limit}")
+    List<Honour> selectAll(int start,int limit);
 
     //增加一个Honour
     @Insert("insert into honour values(#{honourId},#{studentId},#{honour}" +
@@ -26,6 +26,11 @@ public interface HonourMapper {
     //查询一个Honour
     @Select("select * from honour where honourId=#{honourId}")
     Honour select(int honourId);
+
+    //查询一个Honour
+    @Select("select * from honour where studentId=#{studentId} limit #{start},#{limit}")
+    List<Honour> selectBysId(String studentId,int start,int limit);
+
 
     //修改一个Honour
     @Update("update honour set studentId=#{studentId}" +

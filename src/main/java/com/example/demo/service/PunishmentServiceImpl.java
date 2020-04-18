@@ -15,8 +15,8 @@ public class PunishmentServiceImpl implements PunishmentService{
     PunishmentMapper punishmentMapper;
 
     @Override
-    public List<Punishment> selectAll() {
-        return punishmentMapper.selectAll();
+    public List<Punishment> selectAll(int start,int limit) {
+        return punishmentMapper.selectAll(start, limit);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class PunishmentServiceImpl implements PunishmentService{
     }
 
     @Override
-    public Punishment select(int punishmentId) {
-        return punishmentMapper.select(punishmentId);
+    public Punishment select(int studentId) {
+        return punishmentMapper.select(studentId);
     }
 
     @Override

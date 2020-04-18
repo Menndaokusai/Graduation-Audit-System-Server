@@ -15,12 +15,12 @@ import java.util.List;
 public interface ReplacementMapper {
 
     //查询所有Replacement
-    @Select("select * from replacement")
-    List<Replacement> selectAll();
+    @Select("select * from replacement limit #{start},#{limit}")
+    List<Replacement> selectAll(int start,int limit);
 
     //查询一个学生的Replacement
-    @Select("select * from replacement where studentId=#{studentId}")
-    List<Replacement> selectBystudentId(int studentId);
+    @Select("select * from replacement where studentId=#{studentId} limit #{start},#{limit}")
+    List<Replacement> selectBystudentId(String studentId,int start,int limit);
 
     //增加一个Replacement
     @Insert("insert into replacement values(#{replacementId},#{studentId},#{original_course}" +

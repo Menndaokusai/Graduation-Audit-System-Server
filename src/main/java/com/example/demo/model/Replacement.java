@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class Replacement {
 
     private int replacementId;
-    private int studentId;
+    private String studentId;
     private String original_course;
     private Double original_course_credit;
     private String replacement_course_a;
@@ -19,7 +19,7 @@ public class Replacement {
 
     }
 
-    public Replacement(int replacementId, int studentId,
+    public Replacement(int replacementId, String studentId,
                        String original_course, Double original_course_credit,
                        String replacement_course_a, Double replacement_course_a_credit,
                        String replacement_course_b, Double replacement_course_b_credit,
@@ -47,11 +47,11 @@ public class Replacement {
         this.replacementId = replacementId;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
