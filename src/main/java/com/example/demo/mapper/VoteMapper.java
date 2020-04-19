@@ -24,13 +24,13 @@ public interface VoteMapper {
 
     //增加一个Vote
     @Insert("insert into vote values(#{voteId},#{studentId},#{agree}" +
-                                ",#{disagree},#{voting_results},#{publish_time}" +
-                                ",#{deadline})")
+                                ",#{disagree},#{participant},#{voting_results}" +
+                                ",#{publish_time},#{deadline})")
     int insert(Vote vote);
 
     //修改一个Vote
     @Update("update vote set studentId=#{studentId}" +
-                        ",agree=#{agree},disagree=#{disagree}" +
+                        ",agree=#{agree},disagree=#{disagree},#{participant}" +
                         ",voting_results=#{voting_results},publish_time=#{publish_time}" +
                         ",deadline=#{deadline} where voteId=#{voteId}")
     int update(Vote vote);

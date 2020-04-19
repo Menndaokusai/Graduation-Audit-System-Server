@@ -6,6 +6,7 @@ public class Vote {
     private String studentId;
     private int agree;
     private int disagree;
+    private int participant;
     private String voting_results;
     private String publish_time;
     private String deadline;
@@ -16,12 +17,13 @@ public class Vote {
 
     public Vote(int voteId, String studentId,
                 int agree, int disagree,
-                String voting_results, String publish_time,
-                String deadline) {
+                int participant, String voting_results,
+                String publish_time, String deadline) {
         this.voteId = voteId;
         this.studentId = studentId;
         this.agree = agree;
         this.disagree = disagree;
+        this.participant = participant;
         this.voting_results = voting_results;
         this.publish_time = publish_time;
         this.deadline = deadline;
@@ -83,13 +85,22 @@ public class Vote {
         this.deadline = deadline;
     }
 
+    public int getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(int participant) {
+        this.participant = participant;
+    }
+
     @Override
     public String toString() {
         return "Vote{" +
                 "voteId=" + voteId +
-                ", studentId=" + studentId +
-                ", agree='" + agree + '\'' +
-                ", disagree='" + disagree + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", agree=" + agree +
+                ", disagree=" + disagree +
+                ", participant=" + participant +
                 ", voting_results='" + voting_results + '\'' +
                 ", publish_time='" + publish_time + '\'' +
                 ", deadline='" + deadline + '\'' +

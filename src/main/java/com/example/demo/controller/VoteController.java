@@ -59,12 +59,7 @@ public class VoteController {
 
 
     @PostMapping("/update")
-    public Object updateVote(int voteId, String studentId,
-                             int agree, int disagree,
-                             String voting_results, String publish_time,
-                             String deadline){
-
-        Vote vote = new Vote(voteId,studentId,agree,disagree,voting_results,publish_time,deadline);
+    public Object updateVote(@RequestBody Vote vote){
 
         try{
             int result = voteService.update(vote);
