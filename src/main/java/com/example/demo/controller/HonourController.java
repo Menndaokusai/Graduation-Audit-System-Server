@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Honour;
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.service.HonourService;
 import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
@@ -29,8 +29,8 @@ public class HonourController {
         else{
             lists = Collections.singletonList(honourService.selectBysId(studentId,start,limit));
         }
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @GetMapping("/detail")

@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Graduation_Audit;
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.model.Voting_Record;
+import com.example.demo.service.Voting_RecordService;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.model.Vote;
 import com.example.demo.service.VoteService;
 import com.example.demo.utils.DateUtils;
@@ -11,7 +12,6 @@ import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class VoteController {
 
     @Autowired
     VoteService voteService;
+
+    @Autowired
+    Voting_RecordService voting_recordService;
 
 
     @GetMapping("/list")
@@ -33,8 +36,8 @@ public class VoteController {
         else {
             lists = Collections.singletonList(voteService.selectBysId(studentId,start,limit));
         }
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @PostMapping("/create")
@@ -43,7 +46,7 @@ public class VoteController {
         vote.setVoteId(0);
         vote.setAgree(0);
         vote.setDisagree(0);
-        vote.setVoting_results("审核中");
+        vote.setVoting_results("1");
         vote.setPublish_time(publish_time);
         try {
             int result = voteService.insert(vote);
@@ -59,18 +62,52 @@ public class VoteController {
 
 
     @PostMapping("/update")
-    public Object updateVote(@RequestBody Vote vote){
+    public Object updateVote(@RequestBody Voting_Record voting_record){
 
-        try{
-            int result = voteService.update(vote);
-            if(result>0){
-                return new Message(StatusType.SUCCESS_STATUS,"更新成功");
+        int result = 0;
+        int voteId=voting_record.getVoteId();
+        try {
+            String voting_result = voting_recordService.select(voteId,voting_record.getUsername());
+            //检验是否已投票
+            if(voting_result.equals("0")){
+                if(voting_record.getNum()==1){
+                    result=voteService.agree(voteId);
+                }
+                else if (voting_record.getNum()==2){
+                    result=voteService.disagree(voteId);
+                }
+
+                //检验投票结果
+                Vote vote = voteService.selectVote(voteId);
+                double participant=vote.getParticipant();
+                double agree = vote.getAgree();
+                double disagree = vote.getDisagree();
+                //同意人数占比
+                double proportion = agree/participant;
+
+                if((agree+disagree)==participant){
+                    if(proportion>(1.0/2.0)){
+                        vote.setVoting_results("2");
+                    }
+                    else {
+                        vote.setVoting_results("-1");
+                    }
+                    //更新投票结果
+                    voteService.update(vote);
+                }
+
+                if(result>0){
+                    //添加投票记录
+                    voting_recordService.insert(voting_record);
+
+                    return new Message(StatusType.SUCCESS_STATUS,"更新成功");
+                }
+                return new Message(StatusType.ERROR_STATUS,"更新失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return new Message(StatusType.ERROR_STATUS,"更新失败");
+        return new Message(StatusType.ERROR_STATUS,"请勿重复投票");
     }
 
 

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.PassToken;
@@ -50,16 +50,15 @@ public class UserController {
     public Object fetchList(String username,int page,int limit){
         int start = (page-1)*limit;
         List<Object> lists;
-        if(username==null){
+        if(username==null||username.equals("")){
             lists = Collections.singletonList(userService.selectAll(start,limit));
         }
         else{
             lists = Collections.singletonList(userService.select(username));
         }
 
-        int total=((List)lists.get(0)).size();
 
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @GetMapping("/info")

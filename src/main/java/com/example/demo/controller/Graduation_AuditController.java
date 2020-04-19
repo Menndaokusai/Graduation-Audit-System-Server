@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Graduation_Audit;
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
-import com.example.demo.model.Score;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.service.Graduation_AuditService;
 import com.example.demo.service.ScoreService;
 import com.example.demo.utils.StatusType;
@@ -33,8 +31,8 @@ public class Graduation_AuditController {
         else {
             lists = Collections.singletonList(graduation_auditService.selectBysId(studentId,start,limit));
         }
-        int total = lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @GetMapping("/update")

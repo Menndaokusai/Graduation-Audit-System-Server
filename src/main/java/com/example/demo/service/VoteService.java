@@ -12,10 +12,19 @@ public interface VoteService {
     //查询该学生的Vote
     List<Vote> selectBysId(String studentId,int start,int limit);
 
+    //查询该Vote的信息
+    Vote selectVote(int voteId);
+
     //增加一个Vote
     int insert(Vote vote);
 
     //修改一个Vote
     int update(Vote vote);
+
+    //同意
+    int agree(int voteId);
+
+    //不同意
+    int disagree(int voteId);
 
 }

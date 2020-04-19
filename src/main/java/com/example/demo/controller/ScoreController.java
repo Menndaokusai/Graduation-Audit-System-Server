@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.model.Score;
 import com.example.demo.service.ScoreService;
 import com.example.demo.utils.StatusType;
@@ -53,16 +53,16 @@ public class ScoreController {
         else{
             lists = Collections.singletonList(scoreService.selectBystudentId(studentId,start,limit));
         }
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @GetMapping("/slist")
     public Object fetchListBysId(String studentId, int page,int limit){
         int start = (page-1)*limit;
         List<Object> lists = Collections.singletonList(scoreService.selectBystudentId(studentId,start,limit));
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
 

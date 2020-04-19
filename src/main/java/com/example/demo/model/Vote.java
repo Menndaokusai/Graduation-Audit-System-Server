@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 public class Vote {
 
     private int voteId;

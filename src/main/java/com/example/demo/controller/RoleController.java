@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Message;
+import com.example.demo.utils.Message;
 import com.example.demo.service.RoleService;
 import com.example.demo.utils.PassToken;
 import com.example.demo.utils.StatusType;

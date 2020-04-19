@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.model.Replacement;
 import com.example.demo.service.ReplacementService;
 import com.example.demo.utils.StatusType;
@@ -33,8 +33,7 @@ public class ReplacementController {
             lists = Collections.singletonList(replacementService.selectBystudentId(studentId,start,limit));
         }
 
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
     @GetMapping("/detail")

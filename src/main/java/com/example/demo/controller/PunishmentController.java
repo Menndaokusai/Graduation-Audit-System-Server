@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.model.Punishment;
 import com.example.demo.service.PunishmentService;
 import com.example.demo.utils.DateUtils;
@@ -31,9 +31,7 @@ public class PunishmentController {
             lists = Collections.singletonList(punishmentService.select(Integer.parseInt(studentId)));
         }
 
-        int total=lists.size();
-
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
 

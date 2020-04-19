@@ -25,6 +25,11 @@ public class VoteServiceImpl implements VoteService{
     }
 
     @Override
+    public Vote selectVote(int voteId) {
+        return voteMapper.selectVote(voteId);
+    }
+
+    @Override
     public int insert(Vote vote) {
         return voteMapper.insert(vote);
     }
@@ -32,5 +37,15 @@ public class VoteServiceImpl implements VoteService{
     @Override
     public int update(Vote vote) {
         return voteMapper.update(vote);
+    }
+
+    @Override
+    public int agree(int voteId) {
+        return voteMapper.agree(voteId);
+    }
+
+    @Override
+    public int disagree(int voteId) {
+        return voteMapper.disagree(voteId);
     }
 }

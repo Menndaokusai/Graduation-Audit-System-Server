@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Graduation_Requirement;
-import com.example.demo.model.Message;
-import com.example.demo.model.PageList;
+import com.example.demo.utils.Message;
+import com.example.demo.utils.PageList;
 import com.example.demo.service.Graduation_RequirementService;
 import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.StatusType;
-import com.nimbusds.jose.Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +30,8 @@ public class Graduation_RequirementController {
         else {
             lists = Collections.singletonList(graduation_requirementService.selectByYear(enrollment_year,start,limit));
         }
-        int total=lists.size();
-        return new PageList(StatusType.SUCCESS_STATUS,total,lists);
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
 
