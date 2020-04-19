@@ -15,6 +15,11 @@ public class PunishmentServiceImpl implements PunishmentService{
     PunishmentMapper punishmentMapper;
 
     @Override
+    public String punishmentTime(String studentId) {
+        return punishmentMapper.punishmentTime(studentId);
+    }
+
+    @Override
     public List<Punishment> selectAll(int start,int limit) {
         return punishmentMapper.selectAll(start, limit);
     }

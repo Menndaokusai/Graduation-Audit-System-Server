@@ -19,32 +19,19 @@ public class Graduation_AuditController {
 
     @Autowired
     Graduation_AuditService graduation_auditService;
-    ScoreService scoreService;
 
     @GetMapping("/list")
     public Object fetchList(String studentId, int page,int limit){
         int start = (page-1)*limit;
         List<Object> lists;
         if(studentId==null||studentId.equals("")){
-            lists = Collections.singletonList(graduation_auditService.selectAll(start,limit));
+            lists = Collections.singletonList(graduation_auditService.LimitedSelectAll(start,limit));
         }
         else {
-            lists = Collections.singletonList(graduation_auditService.selectBysId(studentId,start,limit));
+            lists = Collections.singletonList(graduation_auditService.selectBysId(studentId));
         }
 
         return new PageList(StatusType.SUCCESS_STATUS,lists);
-    }
-
-    @GetMapping("/update")
-    public Object updateList(){
-//        //获取毕业审核表的所有数据
-//        List<Graduation_Audit> graduation_audit_list = graduation_auditService.selectAll(0,-1);
-//        for (Graduation_Audit g :graduation_audit_list) {
-//            //根据毕业审核表中的学号查找学生的成绩
-//            List<Score> scores = scoreService.selectBystudentId(g.getStudentId());
-//        }
-
-        return new Message(StatusType.SUCCESS_STATUS,"更新成功");
     }
 
 

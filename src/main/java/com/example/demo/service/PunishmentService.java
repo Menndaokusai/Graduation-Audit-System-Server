@@ -5,6 +5,9 @@ import java.util.List;
 
 public interface PunishmentService {
 
+    //统计一个学生所受的处分次数
+    String punishmentTime(String studentId);
+
     //查询所有Punishment
     List<Punishment> selectAll(int start,int limit);
 

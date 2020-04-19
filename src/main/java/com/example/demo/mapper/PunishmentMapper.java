@@ -10,6 +10,15 @@ import java.util.List;
 @Mapper
 public interface PunishmentMapper {
 
+    //统计一个学生的处分次数
+    @Select("SELECT\n" +
+            "\tCOUNT(*)\n" +
+            "FROM\n" +
+            "\tpunishment\n" +
+            "WHERE\n" +
+            "\tstudentId = #{studentId}")
+    String punishmentTime(String studentId);
+
     //查询所有Punishment
     @Select("select * from punishment limit #{start},#{limit}")
     List<Punishment> selectAll(int start,int limit);

@@ -14,13 +14,32 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
     Graduation_AuditMapper graduation_auditMapper;
 
     @Override
-    public List<Graduation_Audit> selectAll(int start,int limit) {
-        return graduation_auditMapper.selectAll(start,limit);
+    public List<Graduation_Audit> selectAll() {
+        return graduation_auditMapper.selectAll();
     }
 
     @Override
-    public List<Graduation_Audit> selectBysId(String studentId, int start, int limit) {
-        return graduation_auditMapper.selectBysId(studentId,start,limit);
+    public List<Graduation_Audit> LimitedSelectAll(int start,int limit) {
+        return graduation_auditMapper.LimitedSelectAll(start,limit);
+    }
+
+    @Override
+    public List<Graduation_Audit> selectBysId(String studentId) {
+        return graduation_auditMapper.selectBysId(studentId);
+    }
+
+    @Override
+    public String insert(String studentId, String studentName, String studentClass) {
+        return graduation_auditMapper.insert(studentId, studentName, studentClass);
+    }
+
+    @Override
+    public int updateAuditData(String studentId,double accum_credit,
+                               double average_score,double relarn_time,
+                               double punishment_time) {
+        return graduation_auditMapper.updateAuditData(studentId, accum_credit,
+                                                      average_score, relarn_time,
+                                                      punishment_time);
     }
 
 }

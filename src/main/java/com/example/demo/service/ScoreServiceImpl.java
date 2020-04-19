@@ -14,18 +14,33 @@ public class ScoreServiceImpl implements ScoreService{
     ScoreMapper scoreMapper;
 
     @Override
+    public List<Score> selectBystudentId(String studentId) {
+        return scoreMapper.selectBystudentId(studentId);
+    }
+
+    @Override
+    public String getAccumCredit(String studentId) {
+        return scoreMapper.getAccumCredit(studentId);
+    }
+
+    @Override
     public List<Score> getData() {
         return scoreMapper.getData();
     }
 
     @Override
-    public List<Score> selectAll(int start,int limit) {
-        return scoreMapper.selectAll(start, limit);
+    public List<Score> selectAll() {
+        return scoreMapper.selectAll();
     }
 
     @Override
-    public List<Score> selectBystudentId(String studentId,int start,int limit) {
-        return scoreMapper.selectBystudentId(studentId,start,limit);
+    public List<Score> LimitedSelectAll(int start,int limit) {
+        return scoreMapper.LimitedSelectAll(start, limit);
+    }
+
+    @Override
+    public List<Score> LimitedSelectBystudentId(String studentId,int start,int limit) {
+        return scoreMapper.LimitedSelectBystudentId(studentId,start,limit);
     }
 
     @Override
