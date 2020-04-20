@@ -14,6 +14,11 @@ public class ReplacementServiceImpl implements ReplacementService{
     ReplacementMapper replacementMapper;
 
     @Override
+    public List<Replacement> find(String studentId, String original_course) {
+        return replacementMapper.find(studentId, original_course);
+    }
+
+    @Override
     public List<Replacement> selectAll(int start,int limit) {
         return replacementMapper.selectAll(start, limit);
     }

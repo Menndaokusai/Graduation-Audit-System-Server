@@ -22,11 +22,15 @@ public interface ReplacementMapper {
     @Select("select * from replacement where studentId=#{studentId} limit #{start},#{limit}")
     List<Replacement> selectBystudentId(String studentId,int start,int limit);
 
+    //查询一个学生对应课程的Replacement
+    @Select("select * from replacement where studentId=#{studentId} and original_course=#{original_course}")
+    List<Replacement> find(String studentId,String original_course);
+
     //增加一个Replacement
-    @Insert("insert into replacement values(#{replacementId},#{studentId},#{original_course}" +
-                                        ",#{original_course_credit},#{replacement_course_a},#{replacement_course_a_credit}" +
-                                        ",#{replacement_course_b},#{replacement_course_b_credit},#{replacement_course_c}" +
-                                        ",#{replacement_course_c_credit},#{report_time},#{audit_result})")
+    @Insert("insert into replacement values(#{replacementId},#{studentId}" +
+                                        ",#{original_course},#{replacement_course_a}" +
+                                        ",#{replacement_course_b},#{replacement_course_c}" +
+                                        ",#{report_time},#{audit_result})")
     int insert(Replacement replacement);
 
     //查询一个Replacement
@@ -35,10 +39,10 @@ public interface ReplacementMapper {
 
     //修改一个Replacement
     @Update("update replacement set studentId=#{studentId}" +
-                                ",original_course=#{original_course},original_course_credit=#{original_course_credit}" +
-                                ",replacement_course_a=#{replacement_course_a},replacement_course_a_credit=#{replacement_course_a_credit}" +
-                                ",replacement_course_b=#{replacement_course_b},replacement_course_b_credit=#{replacement_course_b_credit}" +
-                                ",replacement_course_c=#{replacement_course_c},replacement_course_c_credit=#{replacement_course_c_credit}" +
+                                ",original_course=#{original_course}" +
+                                ",replacement_course_a=#{replacement_course_a}" +
+                                ",replacement_course_b=#{replacement_course_b}" +
+                                ",replacement_course_c=#{replacement_course_c}" +
                                 ",report_time=#{report_time},audit_result=#{audit_result} where replacementId=#{replacementId}")
     int update(Replacement replacement);
 }

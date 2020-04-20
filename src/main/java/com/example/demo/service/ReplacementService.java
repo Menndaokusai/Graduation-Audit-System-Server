@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface ReplacementService {
 
+    //查询一个学生对应课程的Replacement
+    List<Replacement> find(String studentId,String original_course);
+
     //查询所有Replacement
     List<Replacement> selectAll(int start,int limit);
 

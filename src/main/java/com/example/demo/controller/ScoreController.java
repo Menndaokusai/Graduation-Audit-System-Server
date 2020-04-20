@@ -125,39 +125,6 @@ public class ScoreController {
         return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
-//    @GetMapping("/slist")
-//    public Object fetchListBysId(String studentId, int page,int limit){
-//        int start = (page-1)*limit;
-//        List<Object> lists = Collections.singletonList(scoreService.selectBystudentId(studentId,start,limit));
-//
-//        return new PageList(StatusType.SUCCESS_STATUS,lists);
-//    }
-//
-//
-//    @PostMapping("/create")
-//    public Object createScore(String studentId,
-//                              String studentName, String studentClass,
-//                              String college, String academic_year,
-//                              String term, String course_name,
-//                              Double credit, Double score,
-//                              Double retry_score, Double relearn_score){
-//
-//        Score sscore = new Score(0,studentId, studentName,studentClass,
-//                                college,academic_year,term,course_name,
-//                                credit,score,retry_score,relearn_score);
-//        try {
-//            int result = scoreService.insert(sscore);
-//            if(result>0){
-//                return new Message(StatusType.SUCCESS_STATUS,"创建成功");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return new Message(StatusType.ERROR_STATUS,"创建失败");
-//
-//    }
-
     @GetMapping("/delete")
     public Object deleteAll(){
         try {

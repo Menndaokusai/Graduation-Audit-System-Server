@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.utils.DateUtils;
 import com.example.demo.utils.Message;
 import com.example.demo.utils.PageList;
 import com.example.demo.model.Replacement;
@@ -43,18 +44,41 @@ public class ReplacementController {
     @PostMapping("/create")
     public Object createReplacement(@RequestBody Replacement replacement){
 
-        replacement.setReplacementId(0);
-
+        String report_time = DateUtils.getDate();
+        replacement.setReport_time(report_time);
         try {
-            int result = replacementService.insert(replacement);
-            if(result>0){
-                return new Message(StatusType.SUCCESS_STATUS,"创建成功");
+            //获取学分替代表中该学生对应课程的申请记录
+            List<Replacement> replacements = replacementService.find(replacement.getStudentId(),replacement.getOriginal_course());
+            //验证是否已经申请过对该课程的替代
+            if(replacements.size()==0){
+                replacement.setReplacementId(0);
+                //设置为审核中
+                replacement.setAudit_result("0");
+                int result = replacementService.insert(replacement);
+                if(result>0){
+                    return new Message(StatusType.SUCCESS_STATUS,"申请成功");
+                }
             }
+            else{
+                Replacement r = replacements.get(0);
+                //未通过申请则可以继续申请
+                if(r.getAudit_result().equals("2")){
+                    replacement.setReplacementId(0);
+                    //设置为审核中
+                    replacement.setAudit_result("0");
+                    int result = replacementService.insert(replacement);
+                    if(result>0){
+                        return new Message(StatusType.SUCCESS_STATUS,"申请成功");
+                    }
+                }
+                return new Message(StatusType.ERROR_STATUS,"请勿重复申请");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return new Message(StatusType.ERROR_STATUS,"创建失败");
+        return new Message(StatusType.ERROR_STATUS,"申请失败");
     }
 
     @PostMapping("/update")
