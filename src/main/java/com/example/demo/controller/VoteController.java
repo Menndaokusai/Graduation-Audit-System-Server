@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.Graduation_Audit;
 import com.example.demo.model.Voting_Record;
+import com.example.demo.service.Graduation_AuditService;
 import com.example.demo.service.Voting_RecordService;
 import com.example.demo.utils.Message;
 import com.example.demo.utils.PageList;
@@ -24,6 +26,9 @@ public class VoteController {
 
     @Autowired
     Voting_RecordService voting_recordService;
+
+    @Autowired
+    Graduation_AuditService graduation_auditService;
 
 
     @GetMapping("/list")
@@ -67,9 +72,11 @@ public class VoteController {
         int result = 0;
         int voteId=voting_record.getVoteId();
         try {
+            //根据投票号与投票用户获得投票内容
             String voting_result = voting_recordService.select(voteId,voting_record.getUsername());
             //检验是否已投票
             if(voting_result.equals("0")){
+                //还未投票则设置该用户的投票内容
                 if(voting_record.getNum()==1){
                     result=voteService.agree(voteId);
                 }
@@ -87,9 +94,19 @@ public class VoteController {
 
                 if((agree+disagree)==participant){
                     if(proportion>(1.0/2.0)){
+                        //超过半数同意则通过
                         vote.setVoting_results("2");
+                        //通过学号找到审核表中的内容
+                        Graduation_Audit graduation_audit = graduation_auditService.selectBysId(vote.getStudentId()).get(0);
+                        //投票通过则授予学位证书
+                        graduation_audit.setDegree("1");
+                        graduation_auditService.updateCertificate(
+                                graduation_audit.getStudentId(),
+                                graduation_audit.getGraduation(),
+                                graduation_audit.getDegree());
                     }
                     else {
+                        //否则不通过
                         vote.setVoting_results("-1");
                     }
                     //更新投票结果
