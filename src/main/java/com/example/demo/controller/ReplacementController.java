@@ -7,10 +7,7 @@ import com.example.demo.model.Replacement;
 import com.example.demo.service.ReplacementService;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,19 +41,10 @@ public class ReplacementController {
     }
 
     @PostMapping("/create")
-    public Object createReplacement(String studentId,
-                                    String original_course, Double original_course_credit,
-                                    String replacement_course_a, Double replacement_course_a_credit,
-                                    String replacement_course_b, Double replacement_course_b_credit,
-                                    String replacement_course_c, Double replacement_course_c_credit,
-                                    String report_time, String audit_result){
+    public Object createReplacement(@RequestBody Replacement replacement){
 
-        Replacement replacement = new Replacement(0,studentId,
-                original_course,original_course_credit,
-                replacement_course_a,replacement_course_a_credit,
-                replacement_course_b,replacement_course_b_credit,
-                replacement_course_c,replacement_course_c_credit,
-                report_time,audit_result);
+        replacement.setReplacementId(0);
+
         try {
             int result = replacementService.insert(replacement);
             if(result>0){
@@ -70,19 +58,8 @@ public class ReplacementController {
     }
 
     @PostMapping("/update")
-    public Object updateReplacement(int replacementId, String studentId,
-                                    String original_course, Double original_course_credit,
-                                    String replacement_course_a, Double replacement_course_a_credit,
-                                    String replacement_course_b, Double replacement_course_b_credit,
-                                    String replacement_course_c, Double replacement_course_c_credit,
-                                    String report_time, String audit_result){
+    public Object updateReplacement(@RequestBody Replacement replacement){
 
-        Replacement replacement = new Replacement(replacementId,studentId,
-                original_course,original_course_credit,
-                replacement_course_a,replacement_course_a_credit,
-                replacement_course_b,replacement_course_b_credit,
-                replacement_course_c,replacement_course_c_credit,
-                report_time,audit_result);
         try{
             int result = replacementService.update(replacement);
             if(result>0){
