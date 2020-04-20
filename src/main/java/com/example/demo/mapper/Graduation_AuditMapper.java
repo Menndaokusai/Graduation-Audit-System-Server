@@ -25,14 +25,14 @@ public interface Graduation_AuditMapper {
 
     //添加学生基本信息
     @Insert("insert into graduation_audit(studentId,studentName,studentClass) values(#{studentId},#{studentName},#{studentClass})")
-    String insert(String studentId,String studentName,String studentClass);
+    int insert(String studentId,String studentName,String studentClass);
 
     //更新学生的总学分、平均成绩、重学次数、处分次数
     @Update("update graduation_audit set accum_credit=#{accum_credit},average_score=#{average_score}" +
-                                            ",relarn_time=#{relarn_time},punishment_time=#{punishment_time}" +
+                                            ",relearn_time=#{relearn_time},punishment_time=#{punishment_time}" +
                                             "where studentId=#{studentId}")
     int updateAuditData(String studentId,double accum_credit,
-                        double average_score,double relarn_time,
+                        double average_score,double relearn_time,
                         double punishment_time);
 
 }

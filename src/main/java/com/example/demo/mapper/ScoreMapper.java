@@ -52,7 +52,7 @@ public interface ScoreMapper {
     int insert(Score score);
 
     //删除全部Score
-    @Delete("delete * from score")
+    @Delete("truncate table score")
     int deleteAll();
 
 }

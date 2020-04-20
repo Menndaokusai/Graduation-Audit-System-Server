@@ -38,10 +38,14 @@ public class ScoreController {
 
     @PostMapping("/create")
     public Object setData(@RequestBody List<Score> list){
-        //删除成绩表中的所有数据
-        scoreService.deleteAll();
+        //如果成绩表中有旧的数据存在的话
+        List<Score> scoreList = scoreService.selectAll();
+        if(scoreList.size()!=0){
+            //删除成绩表中的所有数据
+            scoreService.deleteAll();
+        }
 
-        Graduation_Audit graduation_audit;
+        List<Graduation_Audit> graduation_auditList;
         int count=0;//统计获取的数据量
         int result=0;//数据插入结果
         try {
@@ -51,8 +55,8 @@ public class ScoreController {
                 result = scoreService.insert(s);
 
                 //检验审核表中是否存在该学生的记录
-                graduation_audit = graduation_auditService.selectBysId(s.getStudentId()).get(0);
-                if(graduation_audit==null){
+                graduation_auditList = graduation_auditService.selectBysId(s.getStudentId());
+                if(graduation_auditList.size()==0){
                     //不存在则添加进审核表
                     graduation_auditService.insert(s.getStudentId(),s.getStudentName(),s.getStudentClass());
                 }

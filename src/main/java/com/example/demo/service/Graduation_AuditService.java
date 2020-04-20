@@ -16,10 +16,10 @@ public interface Graduation_AuditService {
     List<Graduation_Audit> selectBysId(String studentId);
 
     //添加学生基本信息
-    String insert(String studentId,String studentName,String studentClass);
+    int insert(String studentId,String studentName,String studentClass);
 
     //更新审核必要的数据
     int updateAuditData(String studentId,double accum_credit,
-                        double average_score,double relarn_time,
+                        double average_score,double relearn_time,
                         double punishment_time);
 }

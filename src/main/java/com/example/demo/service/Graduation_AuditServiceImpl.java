@@ -29,16 +29,16 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
     }
 
     @Override
-    public String insert(String studentId, String studentName, String studentClass) {
+    public int insert(String studentId, String studentName, String studentClass) {
         return graduation_auditMapper.insert(studentId, studentName, studentClass);
     }
 
     @Override
     public int updateAuditData(String studentId,double accum_credit,
-                               double average_score,double relarn_time,
+                               double average_score,double relearn_time,
                                double punishment_time) {
         return graduation_auditMapper.updateAuditData(studentId, accum_credit,
-                                                      average_score, relarn_time,
+                                                      average_score, relearn_time,
                                                       punishment_time);
     }
 
