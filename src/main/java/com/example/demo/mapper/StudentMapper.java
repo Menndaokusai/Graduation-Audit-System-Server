@@ -14,6 +14,10 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
+    //根据学号查找学生
+    @Select("select * from student where studentId=#{studentId}")
+    Student selectBysId(String studentId);
+
     //获取Student_Copy中的数据
     @Select("select * from student_copy")
     List<Student> getData();

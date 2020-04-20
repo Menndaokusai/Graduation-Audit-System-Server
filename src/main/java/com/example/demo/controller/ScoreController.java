@@ -87,11 +87,11 @@ public class ScoreController {
                     double relearn_time=0;//重学次数
                     for (Score s: scores) {
                         totalCourse++;
-                        if(s.getRelearn_score()>=60){
+                        if(s.getRelearn_score()>0){
                             totalScore+=s.getRelearn_score();
                             relearn_time++;
                         }
-                        else if (s.getRetry_score()>=60){
+                        else if (s.getRetry_score()>0){
                             totalScore+=s.getRetry_score();
                         }
                         else {

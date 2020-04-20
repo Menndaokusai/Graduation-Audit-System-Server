@@ -42,4 +42,9 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
                                                       punishment_time);
     }
 
+    @Override
+    public int updateCertificate(String studentId, String graduation, String degree) {
+        return graduation_auditMapper.updateCertificate(studentId, graduation, degree);
+    }
+
 }

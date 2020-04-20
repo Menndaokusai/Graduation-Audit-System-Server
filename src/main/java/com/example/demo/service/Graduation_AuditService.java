@@ -22,4 +22,7 @@ public interface Graduation_AuditService {
     int updateAuditData(String studentId,double accum_credit,
                         double average_score,double relearn_time,
                         double punishment_time);
+
+    //更新学生的毕业证书、学位证书获得状态
+    int updateCertificate(String studentId,String graduation,String degree);
 }

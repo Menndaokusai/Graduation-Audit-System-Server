@@ -9,6 +9,8 @@ public class Graduation_Audit {
     private Double average_score;
     private Integer relearn_time;
     private Integer punishment_time;
+    private String graduation;
+    private String degree;
     private String voting_results;
 
     public Graduation_Audit (){
@@ -93,16 +95,34 @@ public class Graduation_Audit {
         this.voting_results = voting_results;
     }
 
+    public String getGraduation() {
+        return graduation;
+    }
+
+    public void setGraduation(String graduation) {
+        this.graduation = graduation;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
     @Override
     public String toString() {
         return "Graduation_Audit{" +
-                "studentId=" + studentId +
+                "studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", studentClass='" + studentClass + '\'' +
-                ", accum_credit='" + accum_credit + '\'' +
-                ", average_score='" + average_score + '\'' +
-                ", relearn_time='" + relearn_time + '\'' +
-                ", punishment_time='" + punishment_time + '\'' +
+                ", accum_credit=" + accum_credit +
+                ", average_score=" + average_score +
+                ", relearn_time=" + relearn_time +
+                ", punishment_time=" + punishment_time +
+                ", graduation='" + graduation + '\'' +
+                ", degree='" + degree + '\'' +
                 ", voting_results='" + voting_results + '\'' +
                 '}';
     }

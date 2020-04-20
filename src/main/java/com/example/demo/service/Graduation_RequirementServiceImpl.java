@@ -15,6 +15,11 @@ public class Graduation_RequirementServiceImpl implements Graduation_Requirement
     Graduation_RequirementMapper graduation_requirementMapper;
 
     @Override
+    public Graduation_Requirement find(String major, String enrollment_year, String system) {
+        return graduation_requirementMapper.find(major, enrollment_year, system);
+    }
+
+    @Override
     public List<Graduation_Requirement> selectAll(int start,int limit) {
         return graduation_requirementMapper.selectAll(start,limit);
     }

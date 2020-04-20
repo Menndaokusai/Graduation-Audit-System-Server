@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface Graduation_RequirementService {
 
+    //根据专业、入学年份、学制查询Requirement
+    Graduation_Requirement find(String major,String enrollment_year,String system);
+
     //查询所有Requirement
     List<Graduation_Requirement> selectAll(int start,int limit);
 
