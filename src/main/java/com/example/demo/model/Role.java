@@ -2,23 +2,23 @@ package com.example.demo.model;
 
 public class Role {
 
-    private int roleId;
+    private String roleId;
     private String description;
 
     public Role(){
 
     }
 
-    public Role(int roleId,String description){
+    public Role(String roleId, String description){
         this.roleId=roleId;
         this.description=description;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
