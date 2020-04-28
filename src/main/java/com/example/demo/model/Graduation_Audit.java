@@ -4,31 +4,31 @@ public class Graduation_Audit {
 
     private String studentId;
     private String studentName;
+    private String college;
+    private String major;
     private String studentClass;
-    private Double accum_credit;
-    private Double average_score;
-    private Integer relearn_time;
-    private Integer punishment_time;
-    private String graduation;
-    private String degree;
-    private String voting_results;
+    private String gained_required_course_credit;
+    private String gained_elective_course_credit;
+    private String failed_credit;
+    private String pass_status;
 
     public Graduation_Audit (){
 
     }
 
     public Graduation_Audit(String studentId, String studentName,
-                            String studentClass, Double accum_credit,
-                            Double average_score, Integer relearn_time,
-                            Integer punishment_time, String voting_results) {
+                            String college, String major,
+                            String studentClass, String gained_required_course_credit,
+                            String gained_elective_course_credit, String failed_credit, String pass_status) {
         this.studentId = studentId;
         this.studentName = studentName;
+        this.college = college;
+        this.major = major;
         this.studentClass = studentClass;
-        this.accum_credit = accum_credit;
-        this.average_score = average_score;
-        this.relearn_time = relearn_time;
-        this.punishment_time = punishment_time;
-        this.voting_results = voting_results;
+        this.gained_required_course_credit = gained_required_course_credit;
+        this.gained_elective_course_credit = gained_elective_course_credit;
+        this.failed_credit = failed_credit;
+        this.pass_status = pass_status;
     }
 
     public String getStudentId() {
@@ -55,60 +55,52 @@ public class Graduation_Audit {
         this.studentClass = studentClass;
     }
 
-    public Double getAccum_credit() {
-        return accum_credit;
+    public String getCollege() {
+        return college;
     }
 
-    public void setAccum_credit(Double accum_credit) {
-        this.accum_credit = accum_credit;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
-    public Double getAverage_score() {
-        return average_score;
+    public String getMajor() {
+        return major;
     }
 
-    public void setAverage_score(Double average_score) {
-        this.average_score = average_score;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
-    public Integer getRelearn_time() {
-        return relearn_time;
+    public String getPass_status() {
+        return pass_status;
     }
 
-    public void setRelearn_time(Integer relearn_time) {
-        this.relearn_time = relearn_time;
+    public void setPass_status(String pass_status) {
+        this.pass_status = pass_status;
     }
 
-    public Integer getPunishment_time() {
-        return punishment_time;
+    public String getGained_required_course_credit() {
+        return gained_required_course_credit;
     }
 
-    public void setPunishment_time(Integer punishment_time) {
-        this.punishment_time = punishment_time;
+    public void setGained_required_course_credit(String gained_required_course_credit) {
+        this.gained_required_course_credit = gained_required_course_credit;
     }
 
-    public String getVoting_results() {
-        return voting_results;
+    public String getGained_elective_course_credit() {
+        return gained_elective_course_credit;
     }
 
-    public void setVoting_results(String voting_results) {
-        this.voting_results = voting_results;
+    public void setGained_elective_course_credit(String gained_elective_course_credit) {
+        this.gained_elective_course_credit = gained_elective_course_credit;
     }
 
-    public String getGraduation() {
-        return graduation;
+    public String getFailed_credit() {
+        return failed_credit;
     }
 
-    public void setGraduation(String graduation) {
-        this.graduation = graduation;
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setFailed_credit(String failed_credit) {
+        this.failed_credit = failed_credit;
     }
 
     @Override
@@ -116,14 +108,13 @@ public class Graduation_Audit {
         return "Graduation_Audit{" +
                 "studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
+                ", college='" + college + '\'' +
+                ", major='" + major + '\'' +
                 ", studentClass='" + studentClass + '\'' +
-                ", accum_credit=" + accum_credit +
-                ", average_score=" + average_score +
-                ", relearn_time=" + relearn_time +
-                ", punishment_time=" + punishment_time +
-                ", graduation='" + graduation + '\'' +
-                ", degree='" + degree + '\'' +
-                ", voting_results='" + voting_results + '\'' +
+                ", gained_required_course_credit='" + gained_required_course_credit + '\'' +
+                ", gained_elective_course_credit='" + gained_elective_course_credit + '\'' +
+                ", failed_credit='" + failed_credit + '\'' +
+                ", pass_status='" + pass_status + '\'' +
                 '}';
     }
 }

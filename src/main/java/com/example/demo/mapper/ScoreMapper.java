@@ -11,6 +11,10 @@ import java.util.List;
 @Mapper
 public interface ScoreMapper {
 
+    //统计学生信息
+    @Select("select DISTINCT studentId,studentName,college,major,studentClass from score ORDER BY studentId")
+    List<Score> getStudentInfo();
+
     //统计学生的总学分
     @Select("SELECT\n" +
             "\tSUM(credit)\n" +
@@ -44,10 +48,10 @@ public interface ScoreMapper {
     List<Score> LimitedSelectBystudentId(String studentId,int start,int limit);
 
     //创建Score
-    @Insert("insert into score values(#{scoreId},#{studentId},#{studentName}" +
-                                    ",#{studentClass},#{college},#{academic_year}" +
-                                    ",#{term},#{course_name},#{credit}" +
-                                    ",#{score},#{retry_score},#{relearn_score})")
+    @Insert("insert into score values(#{scoreId},#{studentId},#{studentName},#{enrollment_year}" +
+                                    ",#{college},#{major},#{studentClass},#{academic_year}" +
+                                    ",#{term},#{courseId},#{course_name},#{course_nature},#{credit}" +
+                                    ",#{score},#{retry_score},#{relearn_score},#{relearn_mark})")
     int insert(Score score);
 
     //删除全部Score

@@ -23,6 +23,10 @@ public interface Graduation_AuditMapper {
     @Select("select * from graduation_audit where studentId=#{studentId}")
     List<Graduation_Audit> selectBysId(String studentId);
 
+    //查询分院的所有学生的Audit信息
+    @Select("select * from graduation_audit where college=#{college}")
+    List<Graduation_Audit> selectBycollege(String college);
+
     //添加学生基本信息
     @Insert("insert into graduation_audit(studentId,studentName,studentClass) values(#{studentId},#{studentName},#{studentClass})")
     int insert(String studentId,String studentName,String studentClass);

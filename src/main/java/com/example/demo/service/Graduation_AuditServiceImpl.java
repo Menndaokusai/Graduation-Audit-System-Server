@@ -29,6 +29,11 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
     }
 
     @Override
+    public List<Graduation_Audit> selectBycollege(String college) {
+        return graduation_auditMapper.selectBycollege(college);
+    }
+
+    @Override
     public int insert(String studentId, String studentName, String studentClass) {
         return graduation_auditMapper.insert(studentId, studentName, studentClass);
     }

@@ -13,20 +13,28 @@ public interface Graduation_RequirementMapper {
 
     //根据专业、入学年份、学制查询Requirement
     @Select("select * from graduation_requirement where major=#{major} and enrollment_year=#{enrollment_year} and system=#{system}")
-    Graduation_Requirement find(String major,String enrollment_year,String system);
+    Graduation_Requirement find(String major, String enrollment_year, String system);
 
     //查询所有Requirement
     @Select("select * from graduation_requirement limit #{start},#{limit}")
-    List<Graduation_Requirement> selectAll(int start,int limit);
+    List<Graduation_Requirement> selectAll(int start, int limit);
 
     //查询该入学年份的Requirement
     @Select("select * from graduation_requirement where enrollment_year=#{enrollment_year} limit #{start},#{limit}")
-    List<Graduation_Requirement> selectByYear(String enrollment_year,int start,int limit);
+    List<Graduation_Requirement> selectByYear(String enrollment_year, int start, int limit);
+
+    //查询该学院的所有Requirement
+    @Select("select * from graduation_requirement where college=#{college} limit #{start},#{limit}")
+    List<Graduation_Requirement> selectByCollege(String college, int start, int limit);
+
+    //查询该学院的该年级的所有Requirement
+    @Select("select * from graduation_requirement where college=#{college} and enrollment_year=#{enrollment_year} limit #{start},#{limit}")
+    List<Graduation_Requirement> selectByCollegeAndYear(String college, String enrollment_year ,int start, int limit);
 
     //增加一个Requirement
-    @Insert("insert into graduation_requirement values(#{requirementId},#{enrollment_year},#{major}" +
-                                                    ",#{system},#{accum_credit},#{average_score}" +
-                                                    ",#{relearn_time},#{punishment_time},#{update_time})")
+    @Insert("insert into graduation_requirement values(#{requirementId},#{enrollment_year},#{college},#{major}" +
+                                                    ",#{courseId},#{course_name},#{credit}" +
+                                                    ",#{course_nature},#{recommend_term})")
     int insert(Graduation_Requirement graduation_requirement);
 
     //删除一个Requirement

@@ -14,6 +14,11 @@ public class ScoreServiceImpl implements ScoreService{
     ScoreMapper scoreMapper;
 
     @Override
+    public List<Score> getStudentInfo() {
+        return scoreMapper.getStudentInfo();
+    }
+
+    @Override
     public List<Score> selectBystudentId(String studentId) {
         return scoreMapper.selectBystudentId(studentId);
     }

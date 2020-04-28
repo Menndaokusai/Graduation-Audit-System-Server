@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface ScoreService {
 
+    //统计学生信息
+    List<Score> getStudentInfo();
+
     //获得该学生的所有成绩
     List<Score> selectBystudentId(String studentId);
 

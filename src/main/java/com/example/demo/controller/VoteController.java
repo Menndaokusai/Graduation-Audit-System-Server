@@ -65,67 +65,67 @@ public class VoteController {
         return new Message(StatusType.ERROR_STATUS,"创建失败");
     }
 
-
-    @PostMapping("/update")
-    public Object updateVote(@RequestBody Voting_Record voting_record){
-
-        int result = 0;
-        int voteId=voting_record.getVoteId();
-        try {
-            //根据投票号与投票用户获得投票内容
-            String voting_result = voting_recordService.select(voteId,voting_record.getUsername());
-            //检验是否已投票
-            if(voting_result.equals("0")){
-                //还未投票则设置该用户的投票内容
-                if(voting_record.getNum()==1){
-                    result=voteService.agree(voteId);
-                }
-                else if (voting_record.getNum()==2){
-                    result=voteService.disagree(voteId);
-                }
-
-                //检验投票结果
-                Vote vote = voteService.selectVote(voteId);
-                double participant=vote.getParticipant();
-                double agree = vote.getAgree();
-                double disagree = vote.getDisagree();
-                //同意人数占比
-                double proportion = agree/participant;
-
-                if((agree+disagree)==participant){
-                    if(proportion>(1.0/2.0)){
-                        //超过半数同意则通过
-                        vote.setVoting_results("2");
-                        //通过学号找到审核表中的内容
-                        Graduation_Audit graduation_audit = graduation_auditService.selectBysId(vote.getStudentId()).get(0);
-                        //投票通过则授予学位证书
-                        graduation_audit.setDegree("1");
-                        graduation_auditService.updateCertificate(
-                                graduation_audit.getStudentId(),
-                                graduation_audit.getGraduation(),
-                                graduation_audit.getDegree());
-                    }
-                    else {
-                        //否则不通过
-                        vote.setVoting_results("-1");
-                    }
-                    //更新投票结果
-                    voteService.update(vote);
-                }
-
-                if(result>0){
-                    //添加投票记录
-                    voting_recordService.insert(voting_record);
-
-                    return new Message(StatusType.SUCCESS_STATUS,"更新成功");
-                }
-                return new Message(StatusType.ERROR_STATUS,"更新失败");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new Message(StatusType.ERROR_STATUS,"请勿重复投票");
-    }
+//
+//    @PostMapping("/update")
+//    public Object updateVote(@RequestBody Voting_Record voting_record){
+//
+//        int result = 0;
+//        int voteId=voting_record.getVoteId();
+//        try {
+//            //根据投票号与投票用户获得投票内容
+//            String voting_result = voting_recordService.select(voteId,voting_record.getUsername());
+//            //检验是否已投票
+//            if(voting_result.equals("0")){
+//                //还未投票则设置该用户的投票内容
+//                if(voting_record.getNum()==1){
+//                    result=voteService.agree(voteId);
+//                }
+//                else if (voting_record.getNum()==2){
+//                    result=voteService.disagree(voteId);
+//                }
+//
+//                //检验投票结果
+//                Vote vote = voteService.selectVote(voteId);
+//                double participant=vote.getParticipant();
+//                double agree = vote.getAgree();
+//                double disagree = vote.getDisagree();
+//                //同意人数占比
+//                double proportion = agree/participant;
+//
+//                if((agree+disagree)==participant){
+//                    if(proportion>(1.0/2.0)){
+//                        //超过半数同意则通过
+//                        vote.setVoting_results("2");
+//                        //通过学号找到审核表中的内容
+//                        Graduation_Audit graduation_audit = graduation_auditService.selectBysId(vote.getStudentId()).get(0);
+//                        //投票通过则授予学位证书
+//                        graduation_audit.setDegree("1");
+//                        graduation_auditService.updateCertificate(
+//                                graduation_audit.getStudentId(),
+//                                graduation_audit.getGraduation(),
+//                                graduation_audit.getDegree());
+//                    }
+//                    else {
+//                        //否则不通过
+//                        vote.setVoting_results("-1");
+//                    }
+//                    //更新投票结果
+//                    voteService.update(vote);
+//                }
+//
+//                if(result>0){
+//                    //添加投票记录
+//                    voting_recordService.insert(voting_record);
+//
+//                    return new Message(StatusType.SUCCESS_STATUS,"更新成功");
+//                }
+//                return new Message(StatusType.ERROR_STATUS,"更新失败");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return new Message(StatusType.ERROR_STATUS,"请勿重复投票");
+//    }
 
 
 }

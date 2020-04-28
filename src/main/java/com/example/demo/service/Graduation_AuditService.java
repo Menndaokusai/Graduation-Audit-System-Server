@@ -15,6 +15,9 @@ public interface Graduation_AuditService {
     //查询该学生的Audit
     List<Graduation_Audit> selectBysId(String studentId);
 
+    //查询分院的所有学生的Audit信息
+    List<Graduation_Audit> selectBycollege(String college);
+
     //添加学生基本信息
     int insert(String studentId,String studentName,String studentClass);
 

@@ -14,13 +14,24 @@ public class Graduation_RequirementServiceImpl implements Graduation_Requirement
     @Autowired
     Graduation_RequirementMapper graduation_requirementMapper;
 
+
+    @Override
+    public List<Graduation_Requirement> selectByCollege(String college, int start, int limit) {
+        return graduation_requirementMapper.selectByCollege(college, start, limit);
+    }
+
+    @Override
+    public List<Graduation_Requirement> selectByCollegeAndYear(String college, String enrollment_year, int start, int limit) {
+        return graduation_requirementMapper.selectByCollegeAndYear(college, enrollment_year, start, limit);
+    }
+
     @Override
     public Graduation_Requirement find(String major, String enrollment_year, String system) {
         return graduation_requirementMapper.find(major, enrollment_year, system);
     }
 
     @Override
-    public List<Graduation_Requirement> selectAll(int start,int limit) {
+    public List<Graduation_Requirement> selectAll(int start, int limit) {
         return graduation_requirementMapper.selectAll(start,limit);
     }
 
