@@ -22,12 +22,6 @@ public class Graduation_AuditController {
 
     @Autowired
     Graduation_AuditService graduation_auditService;
-    @Autowired
-    StudentService studentService;
-    @Autowired
-    Graduation_RequirementService graduation_requirementService;
-    @Autowired
-    ScoreService scoreService;
 
     @GetMapping("/list")
     public Object fetchList(String studentId,String college, int page,int limit){
@@ -45,31 +39,6 @@ public class Graduation_AuditController {
 
         return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
-
-//    @GetMapping("/audit")
-//    public Object doAudit(){
-//        //获取学生信息
-//        List<Score> scores = scoreService.getStudentInfo();
-//        //获取所有培养方案
-//        List<Training_Program> graduation_requirements = graduation_requirementService.findAll();
-//
-//        for ( Training_Program g : graduation_requirements ) {
-//            String enrollment_year = g.getEnrollment_year();
-//            String college = g.getCollege();
-//            String major = g.getMajor();
-//            String courseId = g.getCourseId();
-//            String course_name = g.getCourse_name();
-//            String course_nature = g.getCourse_nature();
-//            for ( Score s : scores ) {
-//
-//
-//
-//            }
-//        }
-//
-//
-//        return null;
-//    }
 
 
 }

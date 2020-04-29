@@ -6,6 +6,14 @@ import java.util.List;
 
 public interface Graduation_RequirementService {
 
+    //查询全部
+    List<Graduation_Requirement> findAll();
+
+    //清空毕业需求表
+    int Truncate();
+
+    //查询该学院的该年级的该专业的毕业需求
+    List<Graduation_Requirement> selectByCollegeAndYearAndMajor(String college, String enrollment_year ,String major);
 
     //查询该学院的所有Requirement
     List<Graduation_Requirement> selectByCollege(String college, int start, int limit);

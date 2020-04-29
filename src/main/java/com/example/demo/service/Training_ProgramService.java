@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface Training_ProgramService {
 
+    //清空培养方案表
+    int Truncate();
+
     //查询所有培养方案
     List<Training_Program> findAll();
 

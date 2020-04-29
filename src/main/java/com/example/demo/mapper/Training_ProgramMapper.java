@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.model.Graduation_Requirement;
 import com.example.demo.model.Training_Program;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -12,6 +13,10 @@ import java.util.List;
 @Component
 @Mapper
 public interface Training_ProgramMapper {
+
+    //清空培养方案表
+    @Delete("truncate table training_program")
+    int Truncate();
 
     //查询所有培养方案
     @Select("select * from training_program")

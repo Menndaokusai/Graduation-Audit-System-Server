@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Graduation_Requirement;
 import com.example.demo.utils.*;
 import com.example.demo.service.Graduation_RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,40 +39,18 @@ public class Graduation_RequirementController {
     }
 
 
-//    @GetMapping("/detail")
-//    public Object fetchRequirement(int requirementId){
-//        List<Object> lists = Collections.singletonList(graduation_requirementService.select(requirementId));
-//
-//        return new Message(StatusType.SUCCESS_STATUS,"获取详情成功",lists);
-//    }
+    @PostMapping("/update")
+    public Object updateRequirement(@RequestBody Graduation_Requirement graduation_requirement){
+        try{
+            int result = graduation_requirementService.update(graduation_requirement);
+            if(result>0){
+                return new Message(StatusType.SUCCESS_STATUS,"更新成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-//    @PostMapping("/delete")
-//    public Object delete(@RequestBody Graduation_Requirement graduation_requirement){
-//
-//        try {
-//            int result = graduation_requirementService.delete(graduation_requirement.getRequirementId());
-//            if(result>0){
-//                return new Message(StatusType.SUCCESS_STATUS,"删除成功");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return new Message(StatusType.ERROR_STATUS,"删除失败");
-//    }
-
-//    @PostMapping("/update")
-//    public Object updateRequirement(@RequestBody Graduation_Requirement graduation_requirement){
-//        try{
-//            int result = graduation_requirementService.update(graduation_requirement);
-//            if(result>0){
-//                return new Message(StatusType.SUCCESS_STATUS,"更新成功");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return new Message(StatusType.ERROR_STATUS,"更新失败");
-//    }
+        return new Message(StatusType.ERROR_STATUS,"更新失败");
+    }
 
 }

@@ -11,6 +11,14 @@ import java.util.List;
 @Mapper
 public interface Graduation_RequirementMapper {
 
+    //查询全部
+    @Select("select * from graduation_requirement")
+    List<Graduation_Requirement> findAll();
+
+    //清空毕业需求表
+    @Delete("truncate table graduation_requirement")
+    int Truncate();
+
     //根据专业、入学年份、学制查询Requirement
     @Select("select * from graduation_requirement where major=#{major} and enrollment_year=#{enrollment_year} and system=#{system}")
     Graduation_Requirement find(String major, String enrollment_year, String system);
@@ -31,10 +39,13 @@ public interface Graduation_RequirementMapper {
     @Select("select * from graduation_requirement where college=#{college} and enrollment_year=#{enrollment_year} limit #{start},#{limit}")
     List<Graduation_Requirement> selectByCollegeAndYear(String college, String enrollment_year ,int start, int limit);
 
+    //查询该学院的该年级的该专业的毕业需求
+    @Select("select * from graduation_requirement where college=#{college} and enrollment_year=#{enrollment_year} and major=#{major}")
+    List<Graduation_Requirement> selectByCollegeAndYearAndMajor(String college, String enrollment_year ,String major);
+
     //增加一个Requirement
     @Insert("insert into graduation_requirement values(#{requirementId},#{enrollment_year},#{college},#{major}" +
-                                                    ",#{courseId},#{course_name},#{credit}" +
-                                                    ",#{course_nature},#{recommend_term})")
+                                                    ",#{required_course_credit},#{elective_course_credit})")
     int insert(Graduation_Requirement graduation_requirement);
 
     //删除一个Requirement
@@ -46,10 +57,8 @@ public interface Graduation_RequirementMapper {
     Graduation_Requirement select(int requirementId);
 
     //修改一个Requirement
-    @Update("update graduation_requirement set enrollment_year=#{enrollment_year}" +
-                                            ",major=#{major},system=#{system}" +
-                                            ",accum_credit=#{accum_credit},average_score=#{average_score}" +
-                                            ",relearn_time=#{relearn_time},punishment_time=#{punishment_time}" +
-                                            ",update_time=#{update_time} where requirementId=#{requirementId}")
+    @Update("update graduation_requirement set enrollment_year=#{enrollment_year},college=#{college}" +
+                                            ",major=#{major},required_course_credit=#{required_course_credit}" +
+                                            ",elective_course_credit=#{elective_course_credit} where requirementId=#{requirementId}")
     int update(Graduation_Requirement graduation_requirement);
 }

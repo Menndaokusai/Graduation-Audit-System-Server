@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 public class Graduation_Requirement {
 
+    private int requirementId;
     private String enrollment_year;
     private String college;
     private String major;
@@ -9,9 +10,10 @@ public class Graduation_Requirement {
     private String elective_course_credit;
 
 
-    public Graduation_Requirement(String enrollment_year, String college,
-                                  String major, String required_course_credit,
-                                  String elective_course_credit) {
+    public Graduation_Requirement(int requirementId, String enrollment_year,
+                                  String college, String major,
+                                  String required_course_credit, String elective_course_credit) {
+        this.requirementId = requirementId;
         this.enrollment_year = enrollment_year;
         this.college = college;
         this.major = major;
@@ -59,10 +61,19 @@ public class Graduation_Requirement {
         this.elective_course_credit = elective_course_credit;
     }
 
+    public int getRequirementId() {
+        return requirementId;
+    }
+
+    public void setRequirementId(int requirementId) {
+        this.requirementId = requirementId;
+    }
+
     @Override
     public String toString() {
         return "Graduation_Requirement{" +
-                "enrollment_year='" + enrollment_year + '\'' +
+                "requirementId=" + requirementId +
+                ", enrollment_year='" + enrollment_year + '\'' +
                 ", college='" + college + '\'' +
                 ", major='" + major + '\'' +
                 ", required_course_credit='" + required_course_credit + '\'' +
