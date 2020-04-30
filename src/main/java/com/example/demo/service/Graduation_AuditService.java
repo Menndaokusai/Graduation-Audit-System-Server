@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface Graduation_AuditService {
 
+    //查询学生的所有选修课程
+    List<Score> selectElectiveCourse(String studentId);
+
     //查询该学生的不及格课程
     List<Score> selectFailedCourse(String studentId);
 

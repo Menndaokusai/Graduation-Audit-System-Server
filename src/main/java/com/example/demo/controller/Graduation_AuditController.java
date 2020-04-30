@@ -42,7 +42,6 @@ public class Graduation_AuditController {
         return new PageList(StatusType.SUCCESS_STATUS,lists);
     }
 
-    @PassToken
     @GetMapping("/detail")
     public Object getDetail(String studentId){
 
@@ -50,11 +49,14 @@ public class Graduation_AuditController {
         List<Score> scores = graduation_auditService.selectFailedCourse(studentId);
         //获得学生未修的必修课信息
         List<Training_Program> training_programs = graduation_auditService.selectUnChosenCourse(studentId);
+        //获得学生选修的选修课信息
+        List<Score> escore = graduation_auditService.selectElectiveCourse(studentId);
 
         //添加进List
         List<Object> list = new ArrayList<>();
         list.add(scores);
         list.add(training_programs);
+        list.add(escore);
 
         return new PageList(StatusType.SUCCESS_STATUS,list);
     }

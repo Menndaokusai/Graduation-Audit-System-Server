@@ -13,6 +13,14 @@ import java.util.List;
 @Mapper
 public interface Graduation_AuditMapper {
 
+    //查询学生的所有选修课程
+    @Select("select \n" +
+            "*\n" +
+            "from score\n" +
+            "WHERE course_nature!='必修课'\n" +
+            "and studentId=#{studentId}")
+    List<Score> selectElectiveCourse(String studentId);
+
     //查询该学生的不及格课程
     @Select("select \n" +
             "*\n" +

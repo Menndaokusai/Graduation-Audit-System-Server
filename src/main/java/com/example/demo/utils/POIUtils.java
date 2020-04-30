@@ -49,6 +49,7 @@ public class POIUtils {
                     score = new Score();
                     for (int k = 0; k < physicalNumberOfCells; k++) {
                         XSSFCell cell = row.getCell(k);
+                        //将该单元格的数据转换成String
                         cell.setCellType(CellType.STRING);
                         switch (cell.getCellType()) {
                             // 类型是 String 进入此 case 块
