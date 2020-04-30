@@ -66,10 +66,13 @@ public class Training_ProgramController {
             //获得开课专业
             String major = t.getMajor();
             //查询是否已存在该学院、该年级、该专业的毕业需求
-            List<Graduation_Requirement> graduation_requirements = graduation_requirementService.selectByCollegeAndYearAndMajor(college,enrollment_year,major);
+            List<Graduation_Requirement> graduation_requirements = graduation_requirementService
+                    .selectByCollegeAndYearAndMajor(college,enrollment_year,major);
             if (graduation_requirements.size()==0){
                 //如果不存在的话就添加
-                Graduation_Requirement gr = new Graduation_Requirement(0,enrollment_year,college,major,required_course_credit,"待添加");
+                Graduation_Requirement gr = new Graduation_Requirement(0,enrollment_year,
+                                                            college,major,
+                                                            required_course_credit,"待添加");
                 graduation_requirementService.insert(gr);
             }
             else {

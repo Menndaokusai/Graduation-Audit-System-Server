@@ -2,6 +2,8 @@ package com.example.demo.mapper;
 
 
 import com.example.demo.model.Graduation_Audit;
+import com.example.demo.model.Score;
+import com.example.demo.model.Training_Program;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,35 @@ import java.util.List;
 @Component
 @Mapper
 public interface Graduation_AuditMapper {
+
+    //查询该学生的不及格课程
+    @Select("select \n" +
+            "*\n" +
+            "from score \n" +
+            "where score<60 \n" +
+            "and retry_score<60 \n" +
+            "and relearn_score<60 \n" +
+            "and studentId=#{studentId}")
+    List<Score> selectFailedCourse(String studentId);
+
+    //查询学生未修的必修课
+    @Select("select\n" +
+            "*\n" +
+            "from training_program\n" +
+            "where course_nature='必修课' \n" +
+            "and enrollment_year=(SELECT DISTINCT enrollment_year from score where studentId=#{studentId})\n" +
+            "and college=(select DISTINCT college from score where studentId=#{studentId})\n" +
+            "and major=(SELECT DISTINCT major from score where studentId=#{studentId})\n" +
+            "and courseId \n" +
+            "not IN \n" +
+            "(\n" +
+            "SELECT\n" +
+            "courseId\n" +
+            "from score\n" +
+            "where course_nature='必修课'\n" +
+            "and studentId=#{studentId}\n" +
+            ")")
+    List<Training_Program> selectUnChosenCourse(String studentId);
 
     //查询所有学生的Audit信息
     @Select("select * from graduation_audit")
@@ -27,20 +58,5 @@ public interface Graduation_AuditMapper {
     @Select("select * from graduation_audit where college=#{college}")
     List<Graduation_Audit> selectBycollege(String college);
 
-    //添加学生基本信息
-    @Insert("insert into graduation_audit(studentId,studentName,studentClass) values(#{studentId},#{studentName},#{studentClass})")
-    int insert(String studentId,String studentName,String studentClass);
-
-    //更新学生的总学分、平均成绩、重学次数、处分次数
-    @Update("update graduation_audit set accum_credit=#{accum_credit},average_score=#{average_score}" +
-                                            ",relearn_time=#{relearn_time},punishment_time=#{punishment_time}" +
-                                            "where studentId=#{studentId}")
-    int updateAuditData(String studentId,double accum_credit,
-                        double average_score,double relearn_time,
-                        double punishment_time);
-
-    //更新学生的毕业证书、学位证书获得状态
-    @Update("update graduation_audit set graduation=#{graduation},degree=#{degree} where studentId=#{studentId}")
-    int updateCertificate(String studentId,String graduation,String degree);
 
 }

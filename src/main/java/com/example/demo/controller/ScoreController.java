@@ -34,6 +34,11 @@ public class ScoreController {
     public Object importData(MultipartFile file) throws IOException {
         System.out.println(file);//用来检查前端是否把文件传过来
 
+        //清空课程成绩表中的数据
+        if(scoreService.selectAll().size()!=0){
+            scoreService.deleteAll();
+        }
+
         int count=0;
 
         // 1.自定义一个工具类拿到要解析的文件并解析成要存储的数据
