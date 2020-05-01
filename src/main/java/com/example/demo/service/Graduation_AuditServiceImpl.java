@@ -16,6 +16,11 @@ public class Graduation_AuditServiceImpl implements Graduation_AuditService{
     Graduation_AuditMapper graduation_auditMapper;
 
     @Override
+    public int selectCount() {
+        return graduation_auditMapper.selectCount();
+    }
+
+    @Override
     public List<Score> selectElectiveCourse(String studentId) {
         return graduation_auditMapper.selectElectiveCourse(studentId);
     }

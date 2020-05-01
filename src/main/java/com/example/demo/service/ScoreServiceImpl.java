@@ -14,6 +14,16 @@ public class ScoreServiceImpl implements ScoreService{
     ScoreMapper scoreMapper;
 
     @Override
+    public List<Score> getCourse(String course_name, String studentId) {
+        return scoreMapper.getCourse(course_name, studentId);
+    }
+
+    @Override
+    public int selectCount() {
+        return scoreMapper.selectCount();
+    }
+
+    @Override
     public List<Score> getStudentInfo() {
         return scoreMapper.getStudentInfo();
     }
@@ -26,11 +36,6 @@ public class ScoreServiceImpl implements ScoreService{
     @Override
     public String getAccumCredit(String studentId) {
         return scoreMapper.getAccumCredit(studentId);
-    }
-
-    @Override
-    public List<Score> getData() {
-        return scoreMapper.getData();
     }
 
     @Override

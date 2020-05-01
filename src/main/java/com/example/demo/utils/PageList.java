@@ -6,10 +6,17 @@ public class PageList {
 
     private int code;
     private List<Object> items;
+    private int total;
 
     public PageList(int code,List<Object> items) {
         this.code = code;
         this.items = items;
+    }
+
+    public PageList(int code, List<Object> items, int total) {
+        this.code = code;
+        this.items = items;
+        this.total = total;
     }
 
     public int getCode() {
@@ -28,11 +35,20 @@ public class PageList {
         this.items = items;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "PageList{" +
                 "code=" + code +
                 ", items=" + items +
+                ", total=" + total +
                 '}';
     }
 }

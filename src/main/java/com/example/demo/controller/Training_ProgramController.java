@@ -50,6 +50,9 @@ public class Training_ProgramController {
         // 2.遍历输出你解析的数据格式是否正确
         for (Training_Program t : training_programs) {
             System.out.println(t.toString());
+            if(t.getCollege()==null){
+                t.setCollege("");
+            }
             // 3.进行数据库添加操作
             count+=training_programService.insert(t);
             //获得这门课程的性质
@@ -59,19 +62,17 @@ public class Training_ProgramController {
                 //获得这门课程的学分
                 required_course_credit = t.getCredit();
             }
-            //获得开课学院
-            String college = t.getCollege();
             //获得开课年级
             String enrollment_year = t.getEnrollment_year();
             //获得开课专业
             String major = t.getMajor();
-            //查询是否已存在该学院、该年级、该专业的毕业需求
+            //查询是否已存在该年级、该专业的毕业需求
             List<Graduation_Requirement> graduation_requirements = graduation_requirementService
-                    .selectByCollegeAndYearAndMajor(college,enrollment_year,major);
+                    .selectByYearAndMajor(enrollment_year,major);
             if (graduation_requirements.size()==0){
                 //如果不存在的话就添加
                 Graduation_Requirement gr = new Graduation_Requirement(0,enrollment_year,
-                                                            college,major,
+                                                            major,
                                                             required_course_credit,"待添加");
                 graduation_requirementService.insert(gr);
             }
@@ -107,7 +108,9 @@ public class Training_ProgramController {
             lists = Collections.singletonList(training_programService.selectByYear(enrollment_year,start,limit));
         }
 
-        return new PageList(StatusType.SUCCESS_STATUS,lists);
+        int total = training_programService.selectCount();
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists,total);
     }
 
 

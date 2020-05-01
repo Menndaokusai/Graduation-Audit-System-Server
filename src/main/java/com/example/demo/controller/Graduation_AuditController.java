@@ -24,6 +24,8 @@ public class Graduation_AuditController {
 
     @Autowired
     Graduation_AuditService graduation_auditService;
+    @Autowired
+    ScoreService scoreService;
 
     @GetMapping("/list")
     public Object fetchList(String studentId,String college, int page,int limit){
@@ -39,7 +41,9 @@ public class Graduation_AuditController {
             lists = Collections.singletonList(graduation_auditService.LimitedSelectAll(start,limit));
         }
 
-        return new PageList(StatusType.SUCCESS_STATUS,lists);
+        int total = graduation_auditService.selectCount();
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists,total);
     }
 
     @GetMapping("/detail")
@@ -51,6 +55,23 @@ public class Graduation_AuditController {
         List<Training_Program> training_programs = graduation_auditService.selectUnChosenCourse(studentId);
         //获得学生选修的选修课信息
         List<Score> escore = graduation_auditService.selectElectiveCourse(studentId);
+
+        for (int i = 0 ;i<training_programs.size();i++) {
+            Training_Program t = training_programs.get(i);
+            if(t.getCourse_name().contains("体育(一)")
+                    ||t.getCourse_name().contains("体育(二)")
+                    ||t.getCourse_name().contains("体育(三)")
+                    ||t.getCourse_name().contains("体育(四)")){
+                String course_name = t.getCourse_name();
+                System.out.println(course_name);
+                List<Score> slist = scoreService.getCourse("%"+course_name+"%",studentId);
+                System.out.println(slist);
+                if(slist.size()!=0){
+                    training_programs.remove(i);
+                    i--;
+                }
+            }
+        }
 
         //添加进List
         List<Object> list = new ArrayList<>();

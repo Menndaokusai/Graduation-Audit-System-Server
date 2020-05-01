@@ -16,6 +16,11 @@ public class Graduation_RequirementServiceImpl implements Graduation_Requirement
 
 
     @Override
+    public int selectCount() {
+        return graduation_requirementMapper.selectCount();
+    }
+
+    @Override
     public List<Graduation_Requirement> findAll() {
         return graduation_requirementMapper.findAll();
     }
@@ -26,23 +31,8 @@ public class Graduation_RequirementServiceImpl implements Graduation_Requirement
     }
 
     @Override
-    public List<Graduation_Requirement> selectByCollegeAndYearAndMajor(String college, String enrollment_year, String major) {
-        return graduation_requirementMapper.selectByCollegeAndYearAndMajor(college, enrollment_year, major);
-    }
-
-    @Override
-    public List<Graduation_Requirement> selectByCollege(String college, int start, int limit) {
-        return graduation_requirementMapper.selectByCollege(college, start, limit);
-    }
-
-    @Override
-    public List<Graduation_Requirement> selectByCollegeAndYear(String college, String enrollment_year, int start, int limit) {
-        return graduation_requirementMapper.selectByCollegeAndYear(college, enrollment_year, start, limit);
-    }
-
-    @Override
-    public Graduation_Requirement find(String major, String enrollment_year, String system) {
-        return graduation_requirementMapper.find(major, enrollment_year, system);
+    public List<Graduation_Requirement> selectByYearAndMajor(String enrollment_year, String major) {
+        return graduation_requirementMapper.selectByCollegeAndYearAndMajor(enrollment_year, major);
     }
 
     @Override

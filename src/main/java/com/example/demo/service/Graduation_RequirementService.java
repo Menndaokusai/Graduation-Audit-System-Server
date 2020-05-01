@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Graduation_Requirement;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface Graduation_RequirementService {
+
+    //查询毕业需求的数量
+    int selectCount();
 
     //查询全部
     List<Graduation_Requirement> findAll();
@@ -13,16 +17,7 @@ public interface Graduation_RequirementService {
     int Truncate();
 
     //查询该学院的该年级的该专业的毕业需求
-    List<Graduation_Requirement> selectByCollegeAndYearAndMajor(String college, String enrollment_year ,String major);
-
-    //查询该学院的所有Requirement
-    List<Graduation_Requirement> selectByCollege(String college, int start, int limit);
-
-    //查询该学院的该年级的所有Requirement
-    List<Graduation_Requirement> selectByCollegeAndYear(String college, String enrollment_year ,int start, int limit);
-
-    //根据专业、入学年份、学制查询Requirement
-    Graduation_Requirement find(String major, String enrollment_year, String system);
+    List<Graduation_Requirement> selectByYearAndMajor(String enrollment_year ,String major);
 
     //查询所有Requirement
     List<Graduation_Requirement> selectAll(int start, int limit);

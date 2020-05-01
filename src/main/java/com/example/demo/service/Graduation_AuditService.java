@@ -3,11 +3,15 @@ package com.example.demo.service;
 import com.example.demo.model.Graduation_Audit;
 import com.example.demo.model.Score;
 import com.example.demo.model.Training_Program;
+import org.apache.ibatis.annotations.Select;
 
 
 import java.util.List;
 
 public interface Graduation_AuditService {
+
+    //查询学生人数
+    int selectCount();
 
     //查询学生的所有选修课程
     List<Score> selectElectiveCourse(String studentId);

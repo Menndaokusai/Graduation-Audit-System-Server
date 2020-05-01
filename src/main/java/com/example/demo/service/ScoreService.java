@@ -6,6 +6,12 @@ import java.util.List;
 
 public interface ScoreService {
 
+    //获取学生某课程的修读情况
+    List<Score> getCourse(String course_name,String studentId);
+
+    //查询Score的总数
+    int selectCount();
+
     //统计学生信息
     List<Score> getStudentInfo();
 
@@ -14,9 +20,6 @@ public interface ScoreService {
 
     //获取总学分
     String getAccumCredit(String studentId);
-
-    //获取数据
-    List<Score> getData();
 
     //查询所有Score
     List<Score> selectAll();

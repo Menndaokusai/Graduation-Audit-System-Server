@@ -14,6 +14,11 @@ public class Training_ProgramServiceImpl implements Training_ProgramService{
     Training_ProgramMapper training_programMapper;
 
     @Override
+    public int selectCount() {
+        return training_programMapper.selectCount();
+    }
+
+    @Override
     public int Truncate() {
         return training_programMapper.Truncate();
     }

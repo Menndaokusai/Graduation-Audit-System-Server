@@ -14,6 +14,10 @@ import java.util.List;
 @Mapper
 public interface Training_ProgramMapper {
 
+    //查询培养方案的数量
+    @Select("select COUNT(*) from training_program")
+    int selectCount();
+
     //清空培养方案表
     @Delete("truncate table training_program")
     int Truncate();

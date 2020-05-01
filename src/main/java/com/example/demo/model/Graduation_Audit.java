@@ -11,17 +11,18 @@ public class Graduation_Audit {
     private String gained_elective_course_credit;
     private String required_course_credit;
     private String elective_course_credit;
-    private String failed_credit;
+    private String failed_required_credit;
+    private String failed_elective_credit;
 
     public Graduation_Audit (){
 
     }
 
-    public Graduation_Audit(String studentId, String studentName,
-                            String college, String major,
-                            String studentClass, String gained_required_course_credit,
+
+    public Graduation_Audit(String studentId, String studentName, String college,
+                            String major, String studentClass, String gained_required_course_credit,
                             String gained_elective_course_credit, String required_course_credit,
-                            String elective_course_credit, String failed_credit) {
+                            String elective_course_credit, String failed_required_credit, String failed_elective_credit) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.college = college;
@@ -31,7 +32,8 @@ public class Graduation_Audit {
         this.gained_elective_course_credit = gained_elective_course_credit;
         this.required_course_credit = required_course_credit;
         this.elective_course_credit = elective_course_credit;
-        this.failed_credit = failed_credit;
+        this.failed_required_credit = failed_required_credit;
+        this.failed_elective_credit = failed_elective_credit;
     }
 
     public String getStudentId() {
@@ -90,12 +92,20 @@ public class Graduation_Audit {
         this.gained_elective_course_credit = gained_elective_course_credit;
     }
 
-    public String getFailed_credit() {
-        return failed_credit;
+    public String getFailed_required_credit() {
+        return failed_required_credit;
     }
 
-    public void setFailed_credit(String failed_credit) {
-        this.failed_credit = failed_credit;
+    public void setFailed_required_credit(String failed_required_credit) {
+        this.failed_required_credit = failed_required_credit;
+    }
+
+    public String getFailed_elective_credit() {
+        return failed_elective_credit;
+    }
+
+    public void setFailed_elective_credit(String failed_elective_credit) {
+        this.failed_elective_credit = failed_elective_credit;
     }
 
     public String getRequired_course_credit() {
@@ -126,7 +136,8 @@ public class Graduation_Audit {
                 ", gained_elective_course_credit='" + gained_elective_course_credit + '\'' +
                 ", required_course_credit='" + required_course_credit + '\'' +
                 ", elective_course_credit='" + elective_course_credit + '\'' +
-                ", failed_credit='" + failed_credit + '\'' +
+                ", failed_required_credit='" + failed_required_credit + '\'' +
+                ", failed_elective_credit='" + failed_elective_credit + '\'' +
                 '}';
     }
 }

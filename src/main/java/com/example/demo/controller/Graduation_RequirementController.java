@@ -19,23 +19,19 @@ public class Graduation_RequirementController {
 
 
     @GetMapping("/list")
-    public Object fetchList(String enrollment_year,String college,int page,int limit){
+    public Object fetchList(String enrollment_year,int page,int limit){
         int start = (page-1)*limit;
         List<Object> lists;
-        if (!enrollment_year.equals("")&&!college.equals("")){
-            lists = Collections.singletonList(graduation_requirementService.selectByCollegeAndYear(college,enrollment_year,start,limit));
-        }
-        else if(!enrollment_year.equals("")){
+        if(!enrollment_year.equals("")){
             lists = Collections.singletonList(graduation_requirementService.selectByYear(enrollment_year,start,limit));
-        }
-        else if (!college.equals("")){
-            lists = Collections.singletonList(graduation_requirementService.selectByCollege(college,start,limit));
         }
         else {
             lists = Collections.singletonList(graduation_requirementService.selectAll(start,limit));
         }
 
-        return new PageList(StatusType.SUCCESS_STATUS,lists);
+        int total = graduation_requirementService.selectCount();
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists,total);
     }
 
 

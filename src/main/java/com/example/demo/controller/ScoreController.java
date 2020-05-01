@@ -47,7 +47,13 @@ public class ScoreController {
         for (Score score : scores) {
             System.out.println(score.toString());
             // 3.进行数据库添加操作
-           count+=scoreService.insert(score);
+            if (score.getRetry_score()==null||score.getRetry_score().equals("")){
+                score.setRetry_score("0");
+            }
+            if (score.getRelearn_score()==null){
+                score.setRelearn_score("0");
+            }
+                count+=scoreService.insert(score);
         }
 
         if(count>0){
@@ -69,7 +75,9 @@ public class ScoreController {
             lists = Collections.singletonList(scoreService.LimitedSelectBystudentId(studentId,start,limit));
         }
 
-        return new PageList(StatusType.SUCCESS_STATUS,lists);
+        int total = scoreService.selectCount();
+
+        return new PageList(StatusType.SUCCESS_STATUS,lists,total);
     }
 
     @GetMapping("/delete")

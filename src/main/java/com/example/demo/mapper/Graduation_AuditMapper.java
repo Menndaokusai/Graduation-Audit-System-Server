@@ -25,9 +25,8 @@ public interface Graduation_AuditMapper {
     @Select("select \n" +
             "*\n" +
             "from score \n" +
-            "where score<60 \n" +
-            "and retry_score<60 \n" +
-            "and relearn_score<60 \n" +
+            "where\n" +
+            "(score<60 and (score NOT IN ('及格','合格','中等','良好','优秀')))\n" +
             "and studentId=#{studentId}")
     List<Score> selectFailedCourse(String studentId);
 
@@ -37,7 +36,6 @@ public interface Graduation_AuditMapper {
             "from training_program\n" +
             "where course_nature='必修课' \n" +
             "and enrollment_year=(SELECT DISTINCT enrollment_year from score where studentId=#{studentId})\n" +
-            "and college=(select DISTINCT college from score where studentId=#{studentId})\n" +
             "and major=(SELECT DISTINCT major from score where studentId=#{studentId})\n" +
             "and courseId \n" +
             "not IN \n" +
@@ -49,6 +47,10 @@ public interface Graduation_AuditMapper {
             "and studentId=#{studentId}\n" +
             ")")
     List<Training_Program> selectUnChosenCourse(String studentId);
+
+    //查询学生人数
+    @Select("select COUNT(*) from graduation_audit")
+    int selectCount();
 
     //查询所有学生的Audit信息
     @Select("select * from graduation_audit")

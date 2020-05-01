@@ -11,6 +11,14 @@ import java.util.List;
 @Mapper
 public interface ScoreMapper {
 
+    //获取学生某课程的修读情况
+    @Select("select \n" +
+            "*\n" +
+            "FROM score\n" +
+            "where course_name LIKE #{course_name}\n" +
+            "and studentId=#{studentId}")
+    List<Score> getCourse(String course_name,String studentId);
+
     //统计学生信息
     @Select("select DISTINCT studentId,studentName,college,major,studentClass from score ORDER BY studentId")
     List<Score> getStudentInfo();
@@ -27,13 +35,13 @@ public interface ScoreMapper {
             "OR relearn_score >= 60")
     String getAccumCredit(String studentId);
 
-    //获取Score_Copy的数据
-    @Select("select * from score_copy")
-    List<Score> getData();
-
     //查询所有学生的Score
     @Select("select * from score")
     List<Score> selectAll();
+
+    //查询Score的总数
+    @Select("select COUNT(*) from score")
+    int selectCount();
 
     //查询有限的Score
     @Select("select * from score limit #{start},#{limit}")

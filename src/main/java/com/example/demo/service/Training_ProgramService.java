@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Training_Program;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface Training_ProgramService {
+
+    //查询培养方案的数量
+    int selectCount();
 
     //清空培养方案表
     int Truncate();

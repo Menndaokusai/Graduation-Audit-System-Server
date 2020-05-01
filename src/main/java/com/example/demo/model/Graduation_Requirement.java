@@ -4,18 +4,16 @@ public class Graduation_Requirement {
 
     private int requirementId;
     private String enrollment_year;
-    private String college;
     private String major;
     private String required_course_credit;
     private String elective_course_credit;
 
 
     public Graduation_Requirement(int requirementId, String enrollment_year,
-                                  String college, String major,
+                                  String major,
                                   String required_course_credit, String elective_course_credit) {
         this.requirementId = requirementId;
         this.enrollment_year = enrollment_year;
-        this.college = college;
         this.major = major;
         this.required_course_credit = required_course_credit;
         this.elective_course_credit = elective_course_credit;
@@ -27,14 +25,6 @@ public class Graduation_Requirement {
 
     public void setEnrollment_year(String enrollment_year) {
         this.enrollment_year = enrollment_year;
-    }
-
-    public String getCollege() {
-        return college;
-    }
-
-    public void setCollege(String college) {
-        this.college = college;
     }
 
     public String getMajor() {
@@ -74,7 +64,6 @@ public class Graduation_Requirement {
         return "Graduation_Requirement{" +
                 "requirementId=" + requirementId +
                 ", enrollment_year='" + enrollment_year + '\'' +
-                ", college='" + college + '\'' +
                 ", major='" + major + '\'' +
                 ", required_course_credit='" + required_course_credit + '\'' +
                 ", elective_course_credit='" + elective_course_credit + '\'' +
