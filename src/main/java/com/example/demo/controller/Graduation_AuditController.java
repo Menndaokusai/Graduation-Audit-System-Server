@@ -1,16 +1,17 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Replacement;
 import com.example.demo.model.Training_Program;
 import com.example.demo.model.Score;
-import com.example.demo.service.Graduation_RequirementService;
-import com.example.demo.service.StudentService;
+import com.example.demo.service.ReplacementService;
+import com.example.demo.utils.Message;
 import com.example.demo.utils.PageList;
 import com.example.demo.service.Graduation_AuditService;
 import com.example.demo.service.ScoreService;
-import com.example.demo.utils.PassToken;
 import com.example.demo.utils.StatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,8 @@ public class Graduation_AuditController {
     Graduation_AuditService graduation_auditService;
     @Autowired
     ScoreService scoreService;
+    @Autowired
+    ReplacementService replacementService;
 
     @GetMapping("/list")
     public Object fetchList(String studentId,String college, int page,int limit){
@@ -73,6 +76,16 @@ public class Graduation_AuditController {
             }
         }
 
+        for (int i = 0 ; i<scores.size();i++){
+            Score s =scores.get(i);
+            List<Replacement> replacements = replacementService.selectBysIdAndCourseId(studentId,s.getCourseId());
+            if(replacements.size()!=0){
+                scores.remove(i);
+                i--;
+            }
+        }
+
+
         //添加进List
         List<Object> list = new ArrayList<>();
         list.add(scores);
@@ -82,5 +95,20 @@ public class Graduation_AuditController {
         return new PageList(StatusType.SUCCESS_STATUS,list);
     }
 
+    @GetMapping("/replace")
+    public Object replace(String studentId,String original_courseId,String replace_courseId){
+
+        System.out.println(studentId+" "+original_courseId+" "+replace_courseId);
+
+        Replacement replacement = new Replacement(0,studentId,original_courseId,replace_courseId);
+
+        int result = replacementService.insert(replacement);
+
+        if(result==1){
+            return new Message(StatusType.SUCCESS_STATUS,"操作成功");
+        }
+
+        return new Message(StatusType.ERROR_STATUS,"操作失败");
+    }
 
 }

@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Graduation_Audit;
-import com.example.demo.model.Punishment;
 import com.example.demo.service.Graduation_AuditService;
-import com.example.demo.service.PunishmentService;
 import com.example.demo.utils.*;
 import com.example.demo.model.Score;
 import com.example.demo.service.ScoreService;
@@ -25,9 +22,6 @@ public class ScoreController {
 
     @Autowired
     Graduation_AuditService graduation_auditService;
-
-    @Autowired
-    PunishmentService punishmentService;
 
     //导入Excel数据
     @PostMapping("/import")
