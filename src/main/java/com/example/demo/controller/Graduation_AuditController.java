@@ -59,6 +59,7 @@ public class Graduation_AuditController {
         //获得学生选修的选修课信息
         List<Score> escore = graduation_auditService.selectElectiveCourse(studentId);
 
+        //检索该学生是否修读了体育
         for (int i = 0 ;i<training_programs.size();i++) {
             Training_Program t = training_programs.get(i);
             if(t.getCourse_name().contains("体育(一)")
@@ -67,19 +68,25 @@ public class Graduation_AuditController {
                     ||t.getCourse_name().contains("体育(四)")){
                 String course_name = t.getCourse_name();
                 System.out.println(course_name);
-                List<Score> slist = scoreService.getCourse("%"+course_name+"%",studentId);
+                //检索是否存在体育成绩
+                List<Score> slist = scoreService
+                        .getCourse("%"+course_name+"%",studentId);
                 System.out.println(slist);
                 if(slist.size()!=0){
+                    //存在则从list中移除
                     training_programs.remove(i);
                     i--;
                 }
             }
         }
 
+        //检索这门课程是否有替换记录
         for (int i = 0 ; i<scores.size();i++){
             Score s =scores.get(i);
-            List<Replacement> replacements = replacementService.selectBysIdAndCourseId(studentId,s.getCourseId());
+            List<Replacement> replacements = replacementService
+                    .selectBysIdAndCourseId(studentId,s.getCourseId());
             if(replacements.size()!=0){
+                //存在则从list中移除
                 scores.remove(i);
                 i--;
             }
@@ -100,10 +107,9 @@ public class Graduation_AuditController {
 
         System.out.println(studentId+" "+original_courseId+" "+replace_courseId);
 
+        //添加替换记录
         Replacement replacement = new Replacement(0,studentId,original_courseId,replace_courseId);
-
         int result = replacementService.insert(replacement);
-
         if(result==1){
             return new Message(StatusType.SUCCESS_STATUS,"操作成功");
         }
